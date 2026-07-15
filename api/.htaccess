@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /api/
+
+# 將 API 路徑統一交由入口檔案解析，例如 /api/catalog/list。
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

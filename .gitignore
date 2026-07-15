@@ -1,0 +1,23 @@
+config.local.php
+node_modules/
+tmp/
+uploads/
+
+# Local test captures
+*-playwright.png
+footer-check.png
+sitemap-fixed.png
+sitemap-full.png
+top-button.png
+top-button-home.png
+
+# Runtime visitor and preference data
+json/contributions.json
+json/user-preferences.json
+json/wallpaper-stats.json
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

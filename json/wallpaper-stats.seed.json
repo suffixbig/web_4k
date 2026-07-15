@@ -1,0 +1,19 @@
+{
+  "updated_at": "2026-07-13T00:00:00+08:00",
+  "wallpapers": {
+    "1": {"likes": 2684, "dislikes": 41, "downloads": 8312, "views": 19870, "votes": {}},
+    "2": {"likes": 2518, "dislikes": 56, "downloads": 7741, "views": 18320, "votes": {}},
+    "3": {"likes": 2394, "dislikes": 34, "downloads": 7155, "views": 16980, "votes": {}},
+    "4": {"likes": 1986, "dislikes": 27, "downloads": 6380, "views": 15420, "votes": {}},
+    "5": {"likes": 1872, "dislikes": 62, "downloads": 5904, "views": 14880, "votes": {}},
+    "6": {"likes": 1730, "dislikes": 43, "downloads": 5688, "views": 13640, "votes": {}},
+    "7": {"likes": 1602, "dislikes": 31, "downloads": 5240, "views": 12910, "votes": {}},
+    "8": {"likes": 1488, "dislikes": 38, "downloads": 4976, "views": 11720, "votes": {}},
+    "9": {"likes": 1410, "dislikes": 45, "downloads": 4661, "views": 10980, "votes": {}},
+    "10": {"likes": 1294, "dislikes": 29, "downloads": 4210, "views": 9820, "votes": {}},
+    "11": {"likes": 1186, "dislikes": 24, "downloads": 3905, "views": 9130, "votes": {}},
+    "12": {"likes": 1042, "dislikes": 35, "downloads": 3488, "views": 8460, "votes": {}},
+    "13": {"likes": 968, "dislikes": 39, "downloads": 3201, "views": 7790, "votes": {}},
+    "14": {"likes": 890, "dislikes": 21, "downloads": 2874, "views": 6980, "votes": {}}
+  }
+}

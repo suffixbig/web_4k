@@ -1,0 +1,2 @@
+const form=document.querySelector('#submissionForm');
+if(form) form.addEventListener('submit',async event=>{event.preventDefault();const feedback=document.querySelector('#submissionFeedback');const button=form.querySelector('button[type="submit"]');button.disabled=true;try{const response=await fetch(form.action,{method:'POST',body:new FormData(form)});const data=await response.json();feedback.textContent=data.message||data.error||'投稿完成。';if(data.ok)form.reset();}catch(error){feedback.textContent='網路連線失敗，請稍後再試。';}finally{button.disabled=false;}});

@@ -1,0 +1,5 @@
+<?php $pageKey='submit'; $pageBodyClass='submit-page'; require __DIR__.'/_incview/header.php'; ?>
+<!-- 投稿區域 START -->
+<main id="main-content" tabindex="-1"><section class="section catalog-top"><p class="section-label">CREATOR SUBMISSION</p><h1>投稿獨家二創桌布</h1><p>提交後先進入人工審核；通過才會公開。請確認您擁有作品或取得可公開授權。</p><form id="submissionForm" class="submission-form" action="api/contributions/submit" method="post" enctype="multipart/form-data"><label>作品名稱<input name="title" required maxlength="100"></label><label>作者名稱<input name="creator" required maxlength="60"></label><label>分類<select name="category"><option>國漫</option><option>日系動漫</option><option>遊戲二創</option><option>真人原畫</option><option>深色壁紙</option><option>手機動態壁紙</option><option>貓咪治愈</option><option>賽博朋克</option></select></label><label>色系<input name="colors" placeholder="例如：偏紅、偏紫"></label><label>圖片檔案（僅限 JPG，20MB 以下）<input name="wallpaper" type="file" accept="image/jpeg,.jpg,.jpeg" required></label><button class="button primary" type="submit">送出審核</button><p id="submissionFeedback" aria-live="polite"></p></form></section></main>
+<!-- 投稿區域 END -->
+<?php $pageScript='submit.js'; require __DIR__.'/_incview/footer.php'; ?>

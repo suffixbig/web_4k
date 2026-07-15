@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">幻想冒險桌布館方形標誌</title>
+  <desc id="desc">深色方形背景中的龍翼、星光與影像框標誌。</desc>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="54" x2="430" y2="468" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dce9ff"/>
+      <stop offset="0.42" stop-color="#8db7ff"/>
+      <stop offset="1" stop-color="#6e5bff"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="112" y1="104" x2="396" y2="396" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#08111f"/>
+      <stop offset="1" stop-color="#121827"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#070a11"/>
+  <rect x="36" y="36" width="440" height="440" rx="78" fill="url(#bg)"/>
+  <path d="M116 322c60-114 145-178 260-190-34 28-50 58-48 90 28-5 50-18 74-44-6 64-40 110-103 139-46 21-99 25-183 5Z" fill="url(#mark)"/>
+  <path d="M133 321c47-45 95-65 143-62 37 2 70 18 101 47-83 42-165 46-244 15Z" fill="#0c1524" opacity=".72"/>
+  <rect x="126" y="148" width="260" height="216" rx="30" fill="none" stroke="#07101f" stroke-width="26"/>
+  <path d="M165 319l57-67 45 49 34-37 47 55" fill="none" stroke="#07101f" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="320" cy="198" r="24" fill="#07101f"/>
+  <path d="M388 111l13 34 34 13-34 13-13 34-13-34-34-13 34-13 13-34Z" fill="#07101f"/>
+  <path d="M94 102l9 23 23 9-23 9-9 23-9-23-23-9 23-9 9-23Z" fill="#07101f" opacity=".9"/>
+</svg>

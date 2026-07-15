@@ -1,0 +1,23 @@
+{
+  "name": "web_4k",
+  "version": "1.0.0",
+  "description": "正式網站：`https://4k.1-0.tw/`",
+  "main": "sw.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npm run test:catalog",
+    "test:catalog": "node tests/catalog-jpg-check.cjs",
+    "test:rwd": "node tests/rwd-check.cjs",
+    "test:ai-skill": "node tests/ai-skill-check.cjs",
+    "test:android-app": "node tests/android-app-check.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}

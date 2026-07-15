@@ -1,0 +1,8 @@
+<svg width="320" height="100" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="100" rx="18" fill="#10243E"/>
+  <circle cx="52" cy="50" r="26" fill="#1EB8A6"/>
+  <path d="M40 60 Q52 26 70 44 Q60 44 58 56 Q54 66 40 60Z" fill="#F4B942"/>
+  <rect x="92" y="28" width="180" height="10" rx="5" fill="#F4B942"/>
+  <rect x="92" y="48" width="132" height="10" rx="5" fill="#D9E6F2"/>
+  <text x="92" y="84" font-size="22" fill="#FFFFFF" font-family="sans-serif">帥龍盟姬桌布</text>
+</svg>
