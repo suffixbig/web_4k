@@ -15,7 +15,7 @@ foreach (['codex' => 'Codex', 'claude' => 'Claude'] as $platformKey => $platform
     $skillPlatforms[$platformKey] = [
         'name' => $platformName,
         'path' => $relativePath,
-        'url' => 'https://raw.githubusercontent.com/suffixbig/web_4k/main/' . $relativePath,
+        'url' => 'https://raw.githubusercontent.com/suffixbig/4k/main/' . $relativePath,
         'markdown' => $markdown,
         'version' => $version,
         'versionPath' => "downloads/{$platformKey}/VERSION",

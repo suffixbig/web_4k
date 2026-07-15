@@ -46,11 +46,11 @@
 
 安裝技能時，請使用 GitHub Raw 網址：
 
-- [Codex SKILL.md](https://raw.githubusercontent.com/suffixbig/web_4k/main/downloads/codex/SKILL.md)
-- [Claude SKILL.md](https://raw.githubusercontent.com/suffixbig/web_4k/main/downloads/claude/SKILL.md)
+- [Codex SKILL.md](https://raw.githubusercontent.com/suffixbig/4k/main/downloads/codex/SKILL.md)
+- [Claude SKILL.md](https://raw.githubusercontent.com/suffixbig/4k/main/downloads/claude/SKILL.md)
 
 ```text
-請下載並安裝 https://raw.githubusercontent.com/suffixbig/web_4k/main/downloads/codex/SKILL.md
+請下載並安裝 https://raw.githubusercontent.com/suffixbig/4k/main/downloads/codex/SKILL.md
 ```
 
 ![Codex 與 Claude 桌布技能安裝頁](READMEJPG/ai-skill.jpg)
@@ -80,7 +80,7 @@ Android 版本將網站目錄帶進手機，提供作品搜尋、分批載入、
 ### 安裝
 
 ```bash
-git clone https://github.com/suffixbig/web_4k.git
+git clone https://github.com/suffixbig/4k.git
 cd web_4k
 npm install
 ```
