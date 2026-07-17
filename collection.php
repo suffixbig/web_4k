@@ -6,7 +6,7 @@ require __DIR__ . '/_incview/header.php';
 ?>
 <!-- 主要內容 STAR -->
 <main id="main-content" tabindex="-1">
-    <section class="collection-hero"><div class="section"><p class="section-label">MY FAVORITES & PLAYLIST</p><h1>我的收藏，<br><span>也是 AI 的選圖靈感。</span></h1><p>收藏喜歡的作品，再編輯輪播清單與平日更換頻率。週末由帥龍與萌姬桌布館推薦新桌布。</p></div></section>
+    <section class="collection-hero"><div class="section"><p class="section-label">MY FAVORITES & PLAYLIST</p><h1>我的收藏，<br><span>也是 AI 的選圖靈感。</span></h1><p>收藏喜歡的作品，再編輯輪播清單與平日更換頻率。週末由帥龍萌姬桌布館推薦新桌布。</p></div></section>
     <section class="library-section section" id="favorites">
       <div class="collection-tabs"><button class="active" data-library="favorites"><i data-lucide="heart"></i>我的收藏 <span id="favoriteCount">0</span></button><button data-library="all"><i data-lucide="images"></i>全部桌布</button></div>
       <div class="collection-grid" id="collectionGrid"></div>

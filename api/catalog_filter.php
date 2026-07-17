@@ -5,7 +5,7 @@ function catalogAssetUrl(string $file): string { $file = ltrim(str_replace('\\',
 function catalogSearchTerms(array $input): array {
     $q = trim((string) ($input['q'] ?? $input['query'] ?? ''));
     $lower = mb_strtolower($q, 'UTF-8');
-    $map = ['green' => ['green', '綠', '翠'], 'blue' => ['blue', '藍'], 'red' => ['red', '紅'], 'black' => ['black', '黑', '暗'], 'white' => ['white', '白'], 'purple' => ['purple', '紫'], 'orange' => ['orange', '橘', '金'], 'brown' => ['brown', '棕', '褐']];
+    $map = ['red' => ['red', '紅'], 'orange' => ['orange', '橘'], 'yellow' => ['yellow', 'gold', '黃', '金'], 'green' => ['green', '綠', '翠'], 'blue' => ['blue', '藍'], 'purple' => ['purple', '紫'], 'black' => ['black', '黑', '暗'], 'white' => ['white', '白'], 'brown' => ['brown', '棕', '褐']];
     $colors = array_values(array_filter(array_keys($map), static fn(string $color): bool => array_reduce($map[$color], static fn(bool $found, string $word): bool => $found || str_contains($lower, $word), false)));
     $device = (string) ($input['device'] ?? ''); $orientation = (string) ($input['orientation'] ?? ''); $type = (string) ($input['content_type'] ?? $input['type'] ?? '');
     if ($device === '' && preg_match('/手機|mobile|phone/u', $lower)) $device = 'mobile';
@@ -14,7 +14,7 @@ function catalogSearchTerms(array $input): array {
     if ($orientation === '' && preg_match('/橫式|橫屏|landscape/u', $lower)) $orientation = 'landscape';
     if ($type === '' && preg_match('/真人|寫真|real/u', $lower)) $type = 'real';
     if ($type === '' && preg_match('/ai|人工智慧|生成/u', $lower)) $type = 'ai';
-    $clean = preg_replace('/搜尋|桌布|壁紙|畫作|的畫|作品|手機|mobile|phone|pc|電腦|桌機|desktop|直式|直屏|portrait|橫式|橫屏|landscape|真人|寫真|real|ai|人工智慧|生成|綠色系|綠色|綠|翠色|藍色系|藍色|藍|紅色系|紅色|紅|黑色系|黑色|黑|暗色|白色|白|紫色|紫|橘色|橘|金色|金|棕色|棕|褐色/ui', '', $q) ?? '';
+    $clean = preg_replace('/搜尋|桌布|壁紙|畫作|的畫|作品|手機|mobile|phone|pc|電腦|桌機|desktop|直式|直屏|portrait|橫式|橫屏|landscape|真人|寫真|real|ai|人工智慧|生成|紅色系|紅色|紅|red|橘色系|橘色|橘|orange|黃色系|黃色|黃|金色|金|yellow|gold|綠色系|綠色|綠|翠色|green|藍色系|藍色|藍|blue|紫色系|紫色|紫|purple|黑色系|黑色|黑|暗色|black|白色系|白色|白|white|棕色系|棕色|棕|褐色|brown/ui', '', $q) ?? '';
     return ['q' => trim($clean), 'device' => $device, 'orientation' => $orientation, 'content_type' => $type, 'creator' => trim((string) ($input['creator'] ?? $input['author'] ?? '')), 'colors' => $colors];
 }
 function catalogFilter(array $wallpapers, array $input): array {

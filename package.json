@@ -7,8 +7,12 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "npm run test:catalog",
+    "test": "npm run test:catalog && npm run test:colors",
     "test:catalog": "node tests/catalog-jpg-check.cjs",
+    "test:colors": "node tests/catalog-color-check.cjs",
+    "test:colors:browser": "node tests/catalog-color-browser-check.cjs",
+    "test:xuanling": "node tests/xuanling-check.cjs",
+    "test:wellbeing": "node tests/wellbeing-preview-check.cjs",
     "test:rwd": "node tests/rwd-check.cjs",
     "test:ai-skill": "node tests/ai-skill-check.cjs",
     "test:android-app": "node tests/android-app-check.cjs"

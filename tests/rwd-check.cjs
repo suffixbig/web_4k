@@ -1,8 +1,8 @@
 const { chromium } = require(process.env.PLAYWRIGHT_PATH || "playwright");
 
 const baseUrl = process.env.SITE_URL || "http://127.0.0.1:8788";
-const screenshotDir = process.env.RWD_SCREENSHOT_DIR || ".";
-const expectedCatalogItems = 34;
+const screenshotDir = process.env.RWD_SCREENSHOT_DIR || "";
+const expectedCatalogItems = 54;
 const cases = [
   { name: "desktop", width: 1440, height: 1000, columns: 4 },
   { name: "laptop", width: 1024, height: 900, columns: 3 },
@@ -25,13 +25,13 @@ const cases = [
     await page.locator("#catalogGrid .wallpaper-card").first().waitFor();
 
     const metrics = await page.evaluate(() => {
-      const grid = document.querySelector("#catalogGrid");
+      const grid = document.querySelector("#catalogGrid .wallpaper-orientation-landscape .wallpaper-grid");
       const voteButtons = [...document.querySelectorAll(".card-vote")].slice(0, 2);
       return {
         viewport: window.innerWidth,
         scrollWidth: document.documentElement.scrollWidth,
         columns: getComputedStyle(grid).gridTemplateColumns.split(" ").length,
-        cards: grid.querySelectorAll(".wallpaper-card").length,
+        cards: document.querySelectorAll("#catalogGrid .wallpaper-card").length,
         voteTargets: voteButtons.map((button) => {
           const box = button.getBoundingClientRect();
           return { width: Math.round(box.width), height: Math.round(box.height) };
@@ -50,7 +50,7 @@ const cases = [
     failed ||= !passed;
     console.log(JSON.stringify({ name: testCase.name, passed, noOverflow, correctColumns, touchTargets, pwaReady, ...metrics }));
 
-    if (testCase.name === "mobile") {
+    if (testCase.name === "mobile" && screenshotDir) {
       await page.screenshot({ path: `${screenshotDir}/search-mobile-playwright.png` });
     }
     await page.close();

@@ -1,12 +1,12 @@
 /* 手機桌布沉浸式預覽 */
-.preview-dialog.mobile-preview{width:min(940px,calc(100vw - 32px);background:radial-gradient(circle at 80% 8%,#8a63ff25,transparent 30%),#090b10}
+.preview-dialog.mobile-preview{width:min(940px,calc(100vw - 32px));background:radial-gradient(circle at 80% 8%,#8a63ff25,transparent 30%),#090b10}
 .mobile-preview .dialog-close{right:18px;top:18px}
 .mobile-preview:before{content:"";position:absolute;z-index:1;top:38px;left:50%;width:108px;height:22px;transform:translateX(-50%);border-radius:0 0 14px 14px;background:#090b10}
-.mobile-preview>img{width:min(390px,calc(100vw - 88px));height:min(72dvh,700px);max-height:none;margin:30px auto 18px;object-fit:cover;border:8px solid #202631;border-radius:38px;box-shadow:0 0 0 2px #687181,0 28px 70px #000a}
-.mobile-preview>img:before{content:""}
+.mobile-preview .dialog-image-stage{background:transparent}
+.mobile-preview .dialog-image-stage>img{width:min(390px,calc(100vw - 88px));height:min(72dvh,700px);max-height:none;margin:30px auto 18px;object-fit:cover;border:8px solid #202631;border-radius:38px;box-shadow:0 0 0 2px #687181,0 28px 70px #000a}
 .mobile-preview .dialog-info{max-width:680px;margin:auto;padding:12px 24px 26px;text-align:center;align-items:center;flex-direction:column}
 .mobile-preview .dialog-info small{display:block;max-width:560px;line-height:1.7}
 .mobile-preview .dialog-actions{justify-content:center;flex-wrap:wrap}
 .mobile-preview .dialog-actions .button{min-width:130px}
-@media(max-width:600px){.preview-dialog.mobile-preview{width:calc(100vw - 16px)}.mobile-preview>img{width:min(330px,calc(100vw - 58px));height:min(63dvh,610px);margin-top:22px;border-width:6px;border-radius:31px}.mobile-preview .dialog-info{padding:10px 16px 20px}.mobile-preview .dialog-info h3{font-size:19px}.mobile-preview .dialog-close{right:10px;top:10px}}
-@media(prefers-reduced-motion:reduce){.mobile-preview>img{transition:none}}
+@media(max-width:600px){.preview-dialog.mobile-preview{width:calc(100vw - 16px)}.mobile-preview .dialog-image-stage>img{width:min(330px,calc(100vw - 58px));height:min(63dvh,610px);margin-top:22px;border-width:6px;border-radius:31px}.mobile-preview .dialog-info{padding:10px 16px 20px}.mobile-preview .dialog-info h3{font-size:19px}.mobile-preview .dialog-close{right:10px;top:10px}}
+@media(prefers-reduced-motion:reduce){.mobile-preview .dialog-image-stage>img{transition:none}}

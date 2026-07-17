@@ -2,7 +2,7 @@ const $ = selector => document.querySelector(selector);
 const clientId = localStorage.getItem('luma-client-id') || (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`);
 localStorage.setItem('luma-client-id', clientId);
 
-const names = { game: '遊戲世界', dragon: '帥龍奇幻', anime: '萌姬動漫', black: '暗色護眼' };
+const names = { game: '遊戲世界', dragon: '帥龍奇幻', anime: '萌姬動漫', black: '暗色護眼', xuanling: '玄靈', wellbeing: '幸福仙境' };
 const dialog = $('#previewDialog');
 const toast = $('#toast');
 let wallpapers = [];
@@ -29,7 +29,7 @@ const formatSize = bytes => bytes ? `${(bytes / 1024 / 1024).toFixed(2)} MB` : '
 /* 產生桌布基本資訊欄位 */
 function detailRows(wallpaper) {
   const labels = (wallpaper.labels || []).join('｜') || '未分類';
-  const colors = (wallpaper.colors || []).map(color => ({ red: '偏紅', green: '偏綠', blue: '偏藍', black: '深色', white: '偏白', purple: '偏紫', orange: '偏橘', brown: '偏棕' }[color] || color)).join('、') || '未標示';
+  const colors = (wallpaper.colors || []).map(color => ({ red: '偏紅', orange: '偏橘', yellow: '偏黃', green: '偏綠', blue: '偏藍', purple: '偏紫', black: '深色', white: '偏白', brown: '偏棕' }[color] || color)).join('、') || '未標示';
   const tags = (wallpaper.tags || wallpaper.topics || []).join(', ') || '未標示';
   const date = wallpaper.created_at ? new Date(wallpaper.created_at).toLocaleDateString('zh-TW').replaceAll('/', '-') : '未標示';
   const rows = [['分類', labels], ['色系', colors], ['大小', formatSize(wallpaper.size_bytes)], ['瀏覽量', fmt(wallpaper.views)], ['下載量', fmt(wallpaper.downloads)], ['收藏量', fmt(wallpaper.favorites)], ['網友評分', `${wallpaper.rating_average || 0} 分（${wallpaper.rating_count || 0} 人）`], ['發布時間', date], ['AI 或真人創作', wallpaper.content_type === 'real' ? '真人' : 'AI'], ['作者', wallpaper.creator || '未署名'], ['作品名', wallpaper.title || '未命名'], ['標籤', tags]];
@@ -83,9 +83,9 @@ async function preferenceAction(action, id) {
 
 function queryFilters() {
   const value = query.toLocaleLowerCase('zh-Hant');
-  const colors = { green: /綠|翠|green/, blue: /藍|blue/, red: /紅|red/, black: /黑|暗|black/, white: /白|white/, purple: /紫|purple/, orange: /橘|金|orange/, brown: /棕|褐|brown/ };
+  const colors = { red: /紅|red/, orange: /橘|orange/, yellow: /黃|金|yellow|gold/, green: /綠|翠|green/, blue: /藍|blue/, purple: /紫|purple/, black: /黑|暗|black/, white: /白|white/, brown: /棕|褐|brown/ };
   const foundColors = Object.keys(colors).filter(color => colors[color].test(value));
-  return { device: device === 'all' ? (/手機|mobile|phone/.test(value) ? 'mobile' : /pc|電腦|桌機|desktop/.test(value) ? 'pc' : '') : device, orientation: orientation === 'all' ? (/直式|直屏|portrait/.test(value) ? 'portrait' : /橫式|橫屏|landscape/.test(value) ? 'landscape' : '') : orientation, contentType: contentType === 'all' ? (/真人|寫真|real/.test(value) ? 'real' : /ai|人工智慧|生成/.test(value) ? 'ai' : '') : contentType, colors: foundColors, text: value.replace(/搜尋|桌布|壁紙|畫作|的畫|作品|手機|mobile|phone|pc|電腦|桌機|desktop|直式|直屏|portrait|橫式|橫屏|landscape|真人|寫真|real|ai|人工智慧|生成|綠色系|綠色|綠|翠色|藍色系|藍色|藍|紅色系|紅色|紅|黑色系|黑色|黑|暗色|白色|白|紫色|紫|橘色|橘|金色|金|棕色|棕|褐色/gu, '').trim() };
+  return { device: device === 'all' ? (/手機|mobile|phone/.test(value) ? 'mobile' : /pc|電腦|桌機|desktop/.test(value) ? 'pc' : '') : device, orientation: orientation === 'all' ? (/直式|直屏|portrait/.test(value) ? 'portrait' : /橫式|橫屏|landscape/.test(value) ? 'landscape' : '') : orientation, contentType: contentType === 'all' ? (/真人|寫真|real/.test(value) ? 'real' : /ai|人工智慧|生成/.test(value) ? 'ai' : '') : contentType, colors: foundColors, text: value.replace(/搜尋|桌布|壁紙|畫作|的畫|作品|手機|mobile|phone|pc|電腦|桌機|desktop|直式|直屏|portrait|橫式|橫屏|landscape|真人|寫真|real|ai|人工智慧|生成|紅色系|紅色|紅|red|橘色系|橘色|橘|orange|黃色系|黃色|黃|金色|金|yellow|gold|綠色系|綠色|綠|翠色|green|藍色系|藍色|藍|blue|紫色系|紫色|紫|purple|黑色系|黑色|黑|暗色|black|白色系|白色|白|white|棕色系|棕色|棕|褐色|brown/gu, '').trim() };
 }
 
 function filteredItems() {
@@ -96,7 +96,7 @@ function filteredItems() {
     const matchesOrientation = !filters.orientation || wallpaper.orientation === filters.orientation;
     const matchesType = !filters.contentType || wallpaper.content_type === filters.contentType;
     const wallpaperColors = wallpaper.colors || [];
-    const matchesColor = (activeColor === 'all' || wallpaperColors.includes(activeColor) || (activeColor === 'yellow' && (wallpaperColors.includes('orange') || wallpaperColors.includes('brown')))) && (!filters.colors.length || filters.colors.some(color => wallpaperColors.includes(color)));
+    const matchesColor = (activeColor === 'all' || wallpaperColors.includes(activeColor)) && (!filters.colors.length || filters.colors.some(color => wallpaperColors.includes(color)));
     const searchText = `${wallpaper.title} ${wallpaper.creator || ''} ${wallpaper.content_type || ''} ${(wallpaper.labels || wallpaper.topics.map(item => names[item])).join(' ')} ${(wallpaper.colors || []).join(' ')}`.toLocaleLowerCase('zh-Hant');
     return matchesTopic && matchesDevice && matchesOrientation && matchesType && matchesColor && searchText.includes(filters.text);
   });
@@ -160,6 +160,11 @@ function render() {
 
 function fillDialog(wallpaper) {
   active = wallpaper;
+  const previewList = filteredItems();
+  const previewIndex = previewList.findIndex(item => item.id === wallpaper.id);
+  const previous = previewList[(previewIndex - 1 + previewList.length) % previewList.length];
+  const next = previewList[(previewIndex + 1) % previewList.length];
+  const hasMultiple = previewList.length > 1;
   dialog.classList.toggle('mobile-preview', wallpaper.device === 'mobile' || wallpaper.orientation === 'portrait');
   $('#dialogImage').src = wallpaper.file;
   $('#dialogImage').alt = `${wallpaper.title} 預覽`;
@@ -174,7 +179,22 @@ function fillDialog(wallpaper) {
   $('#dialogDislike').setAttribute('aria-pressed', String(userVotes[wallpaper.id] === 'dislike'));
   $('#dialogFavorite').classList.toggle('voted', profile.favorites.includes(wallpaper.id));
   $('#dialogDownload').href = wallpaper.download_url || wallpaper.file;
-  $('#dialogDownload').download = `帥龍與萌姬桌布館-${wallpaper.title}.png`;
+  $('#dialogDownload').download = `帥龍萌姬桌布館-${wallpaper.title}.jpg`;
+  $('#dialogPosition').textContent = `${previewIndex + 1} / ${previewList.length}`;
+  $('#dialogPrev').disabled = !hasMultiple;
+  $('#dialogNext').disabled = !hasMultiple;
+  $('#dialogPrev').setAttribute('aria-label', previous ? `上一張桌布：${previous.title}` : '上一張桌布');
+  $('#dialogNext').setAttribute('aria-label', next ? `下一張桌布：${next.title}` : '下一張桌布');
+}
+
+function moveDialog(offset) {
+  const previewList = filteredItems();
+  if (previewList.length < 2 || !active) return;
+  const currentIndex = previewList.findIndex(item => item.id === active.id);
+  const nextIndex = (Math.max(currentIndex, 0) + offset + previewList.length) % previewList.length;
+  const nextWallpaper = previewList[nextIndex];
+  fillDialog(nextWallpaper);
+  statsAction(nextWallpaper.id, 'view').catch(() => {});
 }
 
 async function vote(id, type, button) {
@@ -252,7 +272,7 @@ document.addEventListener('click', async event => {
     if (!wallpaper) return;
     const anchor = document.createElement('a');
     anchor.href = wallpaper.download_url || wallpaper.file;
-    anchor.download = `帥龍與萌姬桌布館-${wallpaper.title}.png`;
+    anchor.download = `帥龍萌姬桌布館-${wallpaper.title}.jpg`;
     anchor.click();
     statsAction(wallpaper.id, 'download').then(render).catch(() => {});
   }
@@ -262,6 +282,11 @@ $('#catalogSearch').addEventListener('input', event => { query = event.target.va
 $('#catalogSort').addEventListener('change', event => { sort = event.target.value; render(); });
 document.addEventListener('click', event => { if (event.target.closest('[data-reload]')) location.reload(); });
 document.addEventListener('keydown', event => {
+  if (dialog.open && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
+    event.preventDefault();
+    moveDialog(event.key === 'ArrowLeft' ? -1 : 1);
+    return;
+  }
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
     event.preventDefault();
     $('#catalogSearch').focus();
@@ -269,6 +294,8 @@ document.addEventListener('keydown', event => {
 });
 $('#closeDialog').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+$('#dialogPrev').addEventListener('click', () => moveDialog(-1));
+$('#dialogNext').addEventListener('click', () => moveDialog(1));
 $('#dialogLike').addEventListener('click', event => active && vote(active.id, 'like', event.currentTarget));
 $('#dialogDislike').addEventListener('click', event => active && vote(active.id, 'dislike', event.currentTarget));
 $('#dialogFavorite').addEventListener('click', () => active && preferenceAction('favorite_toggle', active.id).then(() => { fillDialog(active); showToast('收藏已更新'); }));

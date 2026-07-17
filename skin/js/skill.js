@@ -3,7 +3,7 @@ let platform = 'codex';
 
 function getInstallPrompt(skill) {
   const action = platform === 'codex' ? '下載並安裝' : '下載並依此建立 Claude Code 本機技能';
-  return `請${action} ${skill.url}（帥龍與萌姬桌布館 ${skill.version}）。依 SKILL.md 處理「換桌布」、帶條件換桌布，以及搜尋桌布／桌布搜尋／搜尋壁紙／壁紙搜尋；驗證 HTTPS download_url、套用本機 Windows 桌布並回寫 current_set。`;
+  return `請${action} ${skill.url}（帥龍萌姬桌布館 ${skill.version}）。依 SKILL.md 處理「換桌布」、帶條件換桌布，以及搜尋桌布／桌布搜尋／搜尋壁紙／壁紙搜尋；驗證 HTTPS download_url、套用本機 Windows 桌布並回寫 current_set。`;
 }
 
 /* 顯示操作提示。 */

@@ -1,9 +1,9 @@
 ---
 name: wallpaper-switcher
-description: "Claude Code skill for 帥龍與萌姬桌布館 commands: 換桌布 to apply the next local Windows wallpaper; 換桌布 with a condition to randomly apply a matching wallpaper; and 搜桌布 followed by conditions to open or return the matching website search URL."
+description: "Claude Code skill for 帥龍萌姬桌布館 commands: 換桌布 to apply the next local Windows wallpaper; 換桌布 with a condition to randomly apply a matching wallpaper; and 搜桌布 followed by conditions to open or return the matching website search URL."
 ---
 
-# 帥龍與萌姬桌布館 Claude 搜尋與換桌布技能
+# 帥龍萌姬桌布館 Claude 搜尋與換桌布技能
 
 Skill version: v1.115
 

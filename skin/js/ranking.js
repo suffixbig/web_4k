@@ -83,7 +83,7 @@ function fillDialog(wallpaper) {
   $("#dialogTitle").textContent = wallpaper.title;
   $("#dialogMeta").textContent = `目前排名 ${sortedWallpapers().findIndex((item) => item.id === wallpaper.id) + 1} · ${wallpaper.width} × ${wallpaper.height} · ${formatNumber(wallpaper.views)} 次瀏覽`;
   $("#dialogDownload").href = wallpaper.download_url || wallpaper.file;
-  $("#dialogDownload").download = `帥龍與萌姬桌布館-${wallpaper.title}.png`;
+  $("#dialogDownload").download = `帥龍萌姬桌布館-${wallpaper.title}.png`;
   $("#dialogLike span").textContent = formatNumber(wallpaper.likes);
   $("#dialogDislike span").textContent = formatNumber(wallpaper.dislikes);
   $("#dialogLike").classList.toggle("voted", savedVotes[wallpaper.id] === "like");

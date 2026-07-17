@@ -6,14 +6,14 @@ require __DIR__ . '/_incview/header.php';
 ?>
 <!-- 主要內容 STAR -->
 <main id="main-content" tabindex="-1">
-    <section class="hero hero-carousel" aria-label="帥龍與萌姬 AI 桌布技能介紹">
+    <section class="hero hero-carousel" aria-label="帥龍萌姬 AI 桌布技能介紹">
       <article class="hero-slide active" data-slide="0" aria-hidden="false">
         <img class="slide-bg" src="skin/img/assets/desktop/desktop-14.jpg" alt="緋紅奇幻 4K 桌布" fetchpriority="high">
         <div class="hero-shade"></div>
         <div class="hero-content">
           <p class="kicker"><span></span> THE NEW WAY TO WALLPAPER</p>
           <h1>重新改變<br><span>桌布下載習慣。</span></h1>
-          <p>不用再逛網站、下載檔案、打開設定。平日依你的輪播清單執行，週六、週日則由帥龍與萌姬桌布館推薦新桌布。</p>
+          <p>不用再逛網站、下載檔案、打開設定。平日依你的輪播清單執行，週六、週日則由帥龍萌姬桌布館推薦新桌布。</p>
           <div class="hero-actions"><a class="button primary" href="ai-skill.php"><i data-lucide="sparkles"></i>啟用一句話換桌布</a><a class="button glass" href="#how"><i data-lucide="play"></i>看看有多簡單</a></div>
         </div>
       </article>
@@ -66,7 +66,7 @@ require __DIR__ . '/_incview/header.php';
           <p class="section-label">AI WALLPAPER SKILL</p>
           <h2>輪播清單自己排，<br><span>每天 06:00 交給 AI。</span></h2>
           <p>此技能限定 Codex 與 Claude 安裝。平日可選永不、每週或每天更換；週六、週日使用本站推薦新桌布。</p>
-          <div class="prompt-box"><div><i data-lucide="terminal"></i><code id="skillPrompt">幫我安裝帥龍與萌姬桌布館技能：以後我只要說「換桌布」，就取得目前桌布的下一張；無資料時隨機換一張。</code></div><button id="copyPrompt" aria-label="複製 AI 安裝指令"><i data-lucide="copy"></i><span>複製指令</span></button></div>
+          <div class="prompt-box"><div><i data-lucide="terminal"></i><code id="skillPrompt">幫我安裝帥龍萌姬桌布館技能：以後我只要說「換桌布」，就取得目前桌布的下一張；無資料時隨機換一張。</code></div><button id="copyPrompt" aria-label="複製 AI 安裝指令"><i data-lucide="copy"></i><span>複製指令</span></button></div>
           <div class="ai-actions"><a class="button primary" href="ai-skill.php"><i data-lucide="sparkles"></i>前往技能啟用頁</a><a href="api-docs.php">查看 API 說明 <i data-lucide="arrow-up-right"></i></a></div>
         </div>
         <div class="automation-card">
