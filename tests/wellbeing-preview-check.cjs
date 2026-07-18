@@ -18,7 +18,7 @@ const expectedTitles = [
   const catalogResponse = await fetch(`${baseUrl}/api/catalog/list`);
   const catalog = await catalogResponse.json();
   const wellbeing = catalog.wallpapers.filter((wallpaper) => wallpaper.topics.includes("wellbeing"));
-  if (!catalogResponse.ok || !catalog.ok || catalog.count !== 54 || wellbeing.length !== 10) {
+  if (!catalogResponse.ok || !catalog.ok || catalog.count !== catalog.wallpapers.length || wellbeing.length !== 10) {
     throw new Error(`Unexpected catalog response: status=${catalogResponse.status}, total=${catalog.count}, wellbeing=${wellbeing.length}`);
   }
   if (wellbeing.some((wallpaper, index) => (

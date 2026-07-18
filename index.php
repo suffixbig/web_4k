@@ -16,10 +16,9 @@ function homeWallpaperCard(array $wallpaper, string $list, int $index): string {
     $file = (string) ($wallpaper['home_file'] ?? '');
     $width = max(1, (int) ($wallpaper['width'] ?? 1920));
     $height = max(1, (int) ($wallpaper['height'] ?? 1080));
-    $device = ($wallpaper['device'] ?? 'pc') === 'mobile' ? '手機' : '電腦';
-    $orientation = ($wallpaper['orientation'] ?? 'landscape') === 'portrait' ? '直式' : '橫式';
     $likes = (int) ($wallpaper['likes'] ?? 0);
     $downloads = (int) ($wallpaper['downloads'] ?? 0);
+    $quality = $width >= 3840 && $height >= 2160 ? '4K' : ($width >= 1920 && $height >= 1080 ? 'FHD' : 'HD');
     $score = $likes - (int) ($wallpaper['dislikes'] ?? 0);
     $createdAt = (string) ($wallpaper['created_at'] ?? '');
     $dateTimestamp = strtotime($createdAt);
@@ -40,11 +39,15 @@ function homeWallpaperCard(array $wallpaper, string $list, int $index): string {
              alt="<?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?>桌布"
              width="<?= $width ?>" height="<?= $height ?>" loading="<?= $loading ?>" decoding="async">
         <span class="home-wallpaper-badge"><?= htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') ?></span>
-        <span class="home-wallpaper-device"><?= $device ?> · <?= $orientation ?></span>
+        <span class="home-wallpaper-device"><?= $quality ?> · <?= number_format($width) ?>×<?= number_format($height) ?></span>
       </span>
       <span class="home-wallpaper-copy">
         <span><strong><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></strong><small><?= htmlspecialchars($creator, ENT_QUOTES, 'UTF-8') ?></small></span>
-        <span class="home-wallpaper-stats" aria-label="<?= number_format($likes) ?> 個讚，<?= number_format($downloads) ?> 次下載"><i class="fa-solid fa-thumbs-up" aria-hidden="true"></i><?= number_format($likes) ?><i class="fa-solid fa-download" aria-hidden="true"></i><?= number_format($downloads) ?></span>
+        <?php if ($likes > 0 || $downloads > 0): ?>
+          <span class="home-wallpaper-stats" aria-label="<?= number_format($likes) ?> 個讚，<?= number_format($downloads) ?> 次下載"><i class="fa-solid fa-thumbs-up" aria-hidden="true"></i><?= number_format($likes) ?><i class="fa-solid fa-download" aria-hidden="true"></i><?= number_format($downloads) ?></span>
+        <?php else: ?>
+          <span class="home-wallpaper-new" aria-label="新上架桌布">剛上架</span>
+        <?php endif; ?>
       </span>
     </a>
     <?php
@@ -95,7 +98,7 @@ foreach ($homeWallpapers as $wallpaper) {
 
 // 首頁輪播固定使用目錄 ID 1–5；最新與熱門排序更新時不會跟著更換。
 $featureBlueprints = [
-    ['wallpaper_id' => '1', 'label' => 'PROJECT OVERVIEW', 'nav' => '專案總覽', 'title' => "從發現到套用，\n一站完成你的桌布體驗。", 'body' => '帥龍萌姬桌布館把精選作品、自然語言搜尋、收藏排行、AI 技能與 Android App 串在一起，讓找圖不再只是翻目錄。', 'primary_href' => '#latestTitle', 'primary_label' => '開始看最新桌布', 'secondary_href' => 'search.php', 'secondary_label' => '瀏覽完整桌布館', 'icon' => 'fa-layer-group'],
+    ['wallpaper_id' => '1', 'label' => 'FREE HD WALLPAPERS', 'nav' => '免費高畫質', 'title' => "免費高畫質桌布下載，\n手機與電腦都能用。", 'body' => '帥龍、萌姬、遊戲、奇幻與暗色風格集中於同一個可搜尋、可收藏、可排行的桌布空間；每張作品清楚標示實際解析度，找到喜歡的就能立即下載。', 'primary_href' => '#latestTitle', 'primary_label' => '看最新上架桌布', 'secondary_href' => 'search.php', 'secondary_label' => '開始搜尋桌布', 'icon' => 'fa-layer-group'],
     ['wallpaper_id' => '2', 'label' => 'SMART SEARCH', 'nav' => '智慧搜尋', 'title' => "描述你想要的畫面，\n搜尋會理解條件。", 'body' => '輸入作者、色系、手機或電腦、橫式或直式、真人或 AI 等線索，就能快速縮小範圍，直接找到合適桌布。', 'primary_href' => 'search.php', 'primary_label' => '使用完整搜尋', 'secondary_href' => 'search.php?q=暗色護眼', 'secondary_label' => '試找暗色護眼', 'icon' => 'fa-magnifying-glass'],
     ['wallpaper_id' => '3', 'label' => 'LIVE DISCOVERY', 'nav' => '最新熱門', 'title' => "每天看最新，\n也看大家真正喜歡什麼。", 'body' => '首頁固定呈現最新上架 8 張與熱門 8 張；熱門依按讚淨值、下載與瀏覽資料排序，讓好作品更容易被看見。', 'primary_href' => '#popularTitle', 'primary_label' => '查看本週熱門', 'secondary_href' => 'ranking.php', 'secondary_label' => '前往完整排行榜', 'icon' => 'fa-chart-line'],
     ['wallpaper_id' => '4', 'label' => 'AI SKILL', 'nav' => 'AI 技能', 'title' => "一句「換桌布」，\nCodex 與 Claude 就能代勞。", 'body' => 'Codex 與 Claude 各有專用 SKILL.MD，可依你的條件搜尋網站桌布，也能在 Windows 上接手下一張與條件換圖。', 'primary_href' => 'ai-skill.php', 'primary_label' => '查看 AI 安裝技能', 'secondary_href' => 'ai-skill.php#skillPreview', 'secondary_label' => '預覽技能內容', 'icon' => 'fa-wand-magic-sparkles'],
@@ -113,8 +116,8 @@ foreach ($featureBlueprints as $blueprint) {
 require __DIR__ . '/_incview/header.php';
 ?>
 <main id="main-content" tabindex="-1">
-  <section class="home-feature-carousel" data-home-carousel aria-roledescription="carousel" aria-labelledby="homeHeroTitle">
-    <h1 id="homeHeroTitle" class="sr-only">帥龍萌姬桌布館專案特色</h1>
+  <section class="home-feature-carousel" data-home-carousel aria-roledescription="carousel" aria-labelledby="homeHeroLabel">
+    <p id="homeHeroLabel" class="sr-only">帥龍萌姬桌布館精選桌布與主要功能</p>
     <div class="home-feature-track">
       <?php foreach ($homeFeatureSlides as $index => $feature):
           $wallpaper = $feature['wallpaper'];
@@ -134,7 +137,11 @@ require __DIR__ . '/_incview/header.php';
           <div class="section home-feature-inner">
             <div class="home-feature-copy">
               <p class="home-feature-kicker"><span>0<?= $index + 1 ?> / 0<?= count($homeFeatureSlides) ?></span><?= htmlspecialchars((string) $feature['label'], ENT_QUOTES, 'UTF-8') ?></p>
-              <h2><?= nl2br(htmlspecialchars((string) $feature['title'], ENT_QUOTES, 'UTF-8')) ?></h2>
+              <?php if ($index === 0): ?>
+                <h1><?= nl2br(htmlspecialchars((string) $feature['title'], ENT_QUOTES, 'UTF-8')) ?></h1>
+              <?php else: ?>
+                <h2><?= nl2br(htmlspecialchars((string) $feature['title'], ENT_QUOTES, 'UTF-8')) ?></h2>
+              <?php endif; ?>
               <p><?= htmlspecialchars((string) $feature['body'], ENT_QUOTES, 'UTF-8') ?></p>
               <div class="home-feature-actions">
                 <a class="button primary" href="<?= htmlspecialchars((string) $feature['primary_href'], ENT_QUOTES, 'UTF-8') ?>"><i class="fa-solid <?= htmlspecialchars((string) $feature['icon'], ENT_QUOTES, 'UTF-8') ?>" aria-hidden="true"></i><?= htmlspecialchars((string) $feature['primary_label'], ENT_QUOTES, 'UTF-8') ?></a>

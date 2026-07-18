@@ -12,6 +12,12 @@ const renderedIds = async (page) => (await page.locator("#catalogGrid [data-prev
   buttons.map((button) => button.dataset.preview)
 )).sort((a, b) => Number(a) - Number(b));
 
+async function loadAllResults(page) {
+  while (await page.locator("#catalogLoadMore").isVisible()) {
+    await page.locator("#catalogLoadMore").click();
+  }
+}
+
 (async () => {
   const catalogResponse = await fetch(`${baseUrl}/api/catalog/list`);
   const catalog = await catalogResponse.json();
@@ -37,7 +43,8 @@ const renderedIds = async (page) => (await page.locator("#catalogGrid [data-prev
   for (const color of visibleColors) {
     await page.locator(`[data-color="${color}"]`).click();
     const expected = idsForColor(catalog.wallpapers, color);
-    await page.waitForFunction((count) => document.querySelectorAll("#catalogGrid .wallpaper-card").length === count, expected.length);
+    await page.waitForFunction((count) => document.querySelectorAll("#catalogGrid .wallpaper-card").length === count, Math.min(24, expected.length));
+    await loadAllResults(page);
     const actual = await renderedIds(page);
     if (actual.join(",") !== expected.join(",")) throw new Error(`${color} filter mismatch: expected ${expected}, received ${actual}`);
     results[color] = actual.length;
@@ -51,6 +58,8 @@ const renderedIds = async (page) => (await page.locator("#catalogGrid [data-prev
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   await mobilePage.goto(`${baseUrl}/search.php`, { waitUntil: "networkidle" });
   await mobilePage.locator("#catalogGrid .wallpaper-card").first().waitFor();
+  await mobilePage.locator("#mobileFilterToggle").click();
+  await mobilePage.locator("#catalogFilterPanel.is-open").waitFor();
   const mobileMetrics = await mobilePage.evaluate(() => ({
     viewport: window.innerWidth,
     scrollWidth: document.documentElement.scrollWidth,

@@ -17,8 +17,10 @@
 <link rel="stylesheet" href="skin/css/vendor/bootstrap.min.css">
 <link rel="stylesheet" href="skin/css/vendor/all.min.css">
 <link rel="stylesheet" href="skin/css/styles.css?v=<?= htmlspecialchars($styleVersion, ENT_QUOTES, 'UTF-8') ?>">
+<?php if ($pageKey === 'search'): ?>
 <link rel="stylesheet" href="skin/css/mobile-preview.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/mobile-preview.css') ?: time()) ?>">
 <link rel="stylesheet" href="skin/css/wallpaper-details.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/wallpaper-details.css') ?: time()) ?>">
+<?php endif; ?>
 </head>
 <body class="<?= htmlspecialchars($pageBodyClass ?: $pageKey . '-page', ENT_QUOTES, 'UTF-8') ?>">
 <a class="skip-link" href="#main-content">跳至主要內容</a>

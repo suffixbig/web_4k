@@ -41,10 +41,10 @@ async function loadLazyImages(page) {
       latestDates: latest.map((card) => card.dataset.created),
       popularScores: popular.map((card) => Number(card.dataset.score)),
       featureIds: [...document.querySelectorAll("[data-home-feature-slide]")].map((slide) => slide.dataset.wallpaperId),
-      featureTitles: [...document.querySelectorAll("[data-home-feature-slide] h2")].map((title) => title.textContent.replace(/\s+/g, " ").trim()),
+      featureTitles: [...document.querySelectorAll("[data-home-feature-slide] h1, [data-home-feature-slide] h2")].map((title) => title.textContent.replace(/\s+/g, " ").trim()),
       activeFeatureId: document.querySelector("[data-home-feature-slide].is-active")?.dataset.wallpaperId,
       activeFeatureVisible: activeFeatureRect.width > 0 && activeFeatureRect.height > 0 && activeFeatureRect.top >= 0 && activeFeatureRect.bottom <= window.innerHeight,
-      featureLineBreaks: document.querySelectorAll("[data-home-feature-slide] h2 br").length,
+      featureLineBreaks: document.querySelectorAll("[data-home-feature-slide] h1 br, [data-home-feature-slide] h2 br").length,
       featureDotCount: document.querySelectorAll("[data-home-go-slide]").length,
       carouselPaused: document.querySelector("#homeCarouselToggle")?.getAttribute("aria-pressed"),
       apkNavHasIcon: Boolean(document.querySelector('.nav-links a[href="android-app.php"] .nav-item-icon')),
@@ -78,6 +78,7 @@ async function loadLazyImages(page) {
     const carouselButton = document.querySelector("#homeNextSlide").getBoundingClientRect();
     return {
       viewport: window.innerWidth,
+      viewportHeight: window.innerHeight,
       scrollWidth: document.documentElement.scrollWidth,
       brand: { width: Math.round(brand.width), height: Math.round(brand.height) },
       navOpen: getComputedStyle(document.querySelector("#primaryNavLinks")).display !== "none",
@@ -91,6 +92,8 @@ async function loadLazyImages(page) {
       activeFeatureId: document.querySelector("[data-home-feature-slide].is-active")?.dataset.wallpaperId,
       latestCount: document.querySelectorAll('[data-home-list="latest"] .home-wallpaper-card').length,
       popularCount: document.querySelectorAll('[data-home-list="popular"] .home-wallpaper-card').length,
+      heroHeight: Math.round(document.querySelector('.home-feature-carousel').getBoundingClientRect().height),
+      searchStripTop: Math.round(document.querySelector('.home-search-strip').getBoundingClientRect().top),
     };
   });
 
@@ -113,7 +116,7 @@ async function loadLazyImages(page) {
   const searchValue = await searchProbe.locator("#catalogSearch").inputValue();
 
   const passed = pageErrors.length === 0
-    && desktopState.heading.includes("專案特色")
+    && desktopState.heading.includes("免費高畫質桌布下載")
     && desktopState.latestCount === 8
     && desktopState.popularCount === 8
     && JSON.stringify(desktopState.featureIds) === JSON.stringify(["1", "2", "3", "4", "5"])
@@ -152,6 +155,8 @@ async function loadLazyImages(page) {
     && mobileState.activeFeatureId === "1"
     && mobileState.latestCount === 8
     && mobileState.popularCount === 8
+    && mobileState.heroHeight <= 640
+    && mobileState.searchStripTop < mobileState.viewportHeight
     && searchValue === "藍色手機直式 AI 龍";
 
   console.log(JSON.stringify({ passed, pageErrors, desktopState, carouselState, mobileState, searchValue }));

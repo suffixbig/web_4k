@@ -18,7 +18,7 @@ const expectedTitles = [
   const catalogResponse = await fetch(`${baseUrl}/api/catalog/list`);
   const catalog = await catalogResponse.json();
   const xuanling = catalog.wallpapers.filter((wallpaper) => wallpaper.topics.includes("xuanling"));
-  if (!catalogResponse.ok || !catalog.ok || catalog.count !== 54 || xuanling.length !== 10) {
+  if (!catalogResponse.ok || !catalog.ok || catalog.count !== catalog.wallpapers.length || xuanling.length !== 10) {
     throw new Error(`Unexpected catalog response: status=${catalogResponse.status}, total=${catalog.count}, xuanling=${xuanling.length}`);
   }
   if (xuanling.some((wallpaper) => !/xuanling-\d{2}\.jpg$/.test(wallpaper.file) || wallpaper.width !== 1920 || wallpaper.height !== 1080)) {
@@ -32,7 +32,7 @@ const expectedTitles = [
 
   await page.goto(`${baseUrl}/search.php`, { waitUntil: "networkidle" });
   await page.locator("#catalogGrid .wallpaper-card").first().waitFor();
-  if (await page.locator("#catalogGrid .wallpaper-card").count() !== 54) throw new Error("The full catalog did not render 54 cards.");
+  if (await page.locator("#catalogGrid .wallpaper-card").count() !== Math.min(24, catalog.count)) throw new Error("The first progressive catalog batch did not render correctly.");
 
   await page.locator('[data-topic="xuanling"]').click();
   await page.waitForFunction(() => document.querySelectorAll("#catalogGrid .wallpaper-card").length === 10);
@@ -48,6 +48,10 @@ const expectedTitles = [
 
   await page.locator('[data-preview="44"]').evaluate((button) => button.click());
   await page.locator("#previewDialog[open]").waitFor();
+  await page.waitForFunction(() => {
+    const image = document.querySelector("#dialogImage");
+    return image?.complete && image.naturalWidth > 0;
+  });
   const preview = await page.locator("#dialogImage").evaluate((image) => ({
     src: image.getAttribute("src"),
     width: image.naturalWidth,

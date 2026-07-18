@@ -8,6 +8,7 @@ const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "json", "w
 const statsPath = path.join(__dirname, "..", "json", "wallpaper-stats.json");
 const stats = fs.existsSync(statsPath) ? JSON.parse(fs.readFileSync(statsPath, "utf8")) : { wallpapers: {} };
 const expectedCatalogItems = (catalog.wallpapers || []).filter((item) => !stats.wallpapers?.[item.id]?.auto_hidden).length;
+const expectedInitialItems = Math.min(24, expectedCatalogItems);
 const cases = [
   { name: "desktop", width: 1440, height: 1000, columns: 4 },
   { name: "laptop", width: 1024, height: 900, columns: 3 },
@@ -31,27 +32,31 @@ const cases = [
 
     const metrics = await page.evaluate(() => {
       const grid = document.querySelector("#catalogGrid .wallpaper-orientation-landscape .wallpaper-grid");
-      const voteButtons = [...document.querySelectorAll(".card-vote")].slice(0, 2);
+      const quickActions = [...document.querySelectorAll(".quick-favorite, .quick-download")].slice(0, 4);
+      const filterToggle = document.querySelector("#mobileFilterToggle");
       return {
         viewport: window.innerWidth,
         scrollWidth: document.documentElement.scrollWidth,
         columns: getComputedStyle(grid).gridTemplateColumns.split(" ").length,
         cards: document.querySelectorAll("#catalogGrid .wallpaper-card").length,
-        voteTargets: voteButtons.map((button) => {
+        actionTargets: quickActions.map((button) => {
           const box = button.getBoundingClientRect();
           return { width: Math.round(box.width), height: Math.round(box.height) };
-        })
+        }),
+        filterTarget: filterToggle ? (() => { const box = filterToggle.getBoundingClientRect(); return { width: Math.round(box.width), height: Math.round(box.height) }; })() : null,
+        resultText: document.querySelector("#resultCount")?.textContent || "",
       };
     });
 
     const noOverflow = metrics.scrollWidth <= metrics.viewport;
     const correctColumns = metrics.columns === testCase.columns;
-    const touchTargets = metrics.voteTargets.every((target) => target.height >= 44 && target.width >= 44);
+    const touchTargets = metrics.actionTargets.every((target) => target.height >= 44 && target.width >= 44)
+      && (testCase.width > 760 || (metrics.filterTarget.height >= 44 && metrics.filterTarget.width >= 44));
     const pwaReady = testCase.name !== "mobile" || await page.evaluate(() => Promise.race([
       navigator.serviceWorker.ready.then((registration) => Boolean(registration.active)),
       new Promise((resolve) => setTimeout(() => resolve(false), 5000))
     ]));
-    const passed = noOverflow && correctColumns && metrics.cards === expectedCatalogItems && touchTargets && pwaReady;
+    const passed = noOverflow && correctColumns && metrics.cards === expectedInitialItems && metrics.resultText.includes(`/ ${expectedCatalogItems}`) && touchTargets && pwaReady;
     failed ||= !passed;
     console.log(JSON.stringify({ name: testCase.name, passed, noOverflow, correctColumns, touchTargets, pwaReady, ...metrics }));
 
