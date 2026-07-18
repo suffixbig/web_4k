@@ -1,8 +1,13 @@
 const { chromium } = require(process.env.PLAYWRIGHT_PATH || "playwright");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const baseUrl = process.env.SITE_URL || "http://127.0.0.1:8788";
 const screenshotDir = process.env.RWD_SCREENSHOT_DIR || "";
-const expectedCatalogItems = 54;
+const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "json", "wallpapers.json"), "utf8"));
+const statsPath = path.join(__dirname, "..", "json", "wallpaper-stats.json");
+const stats = fs.existsSync(statsPath) ? JSON.parse(fs.readFileSync(statsPath, "utf8")) : { wallpapers: {} };
+const expectedCatalogItems = (catalog.wallpapers || []).filter((item) => !stats.wallpapers?.[item.id]?.auto_hidden).length;
 const cases = [
   { name: "desktop", width: 1440, height: 1000, columns: 4 },
   { name: "laptop", width: 1024, height: 900, columns: 3 },

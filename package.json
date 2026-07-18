@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "npm run test:catalog && npm run test:colors",
+    "test": "npm run test:catalog && npm run test:colors && npm run test:heart-sutra",
     "test:catalog": "node tests/catalog-jpg-check.cjs",
     "test:colors": "node tests/catalog-color-check.cjs",
     "test:colors:browser": "node tests/catalog-color-browser-check.cjs",
@@ -15,7 +15,10 @@
     "test:wellbeing": "node tests/wellbeing-preview-check.cjs",
     "test:rwd": "node tests/rwd-check.cjs",
     "test:ai-skill": "node tests/ai-skill-check.cjs",
-    "test:android-app": "node tests/android-app-check.cjs"
+    "test:android-app": "node tests/android-app-check.cjs",
+    "test:home": "node tests/home-check.cjs",
+    "test:pwa-csp": "node tests/pwa-csp-check.cjs",
+    "test:heart-sutra": "node tests/heart-sutra-ink-check.cjs"
   },
   "keywords": [],
   "author": "",

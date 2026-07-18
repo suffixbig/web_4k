@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'dragon-maiden-wallpaper-';
-const CACHE_NAME = `${CACHE_PREFIX}v4`;
+const CACHE_NAME = `${CACHE_PREFIX}v5`;
 const APP_SHELL = [
   '/',
   '/index.php',
@@ -11,18 +11,41 @@ const APP_SHELL = [
   '/api-docs.php',
   '/offline.php',
   '/skin/css/styles.css',
-  '/home.js',
-  '/catalog.js',
-  '/collection.js',
-  '/ranking.js',
-  '/skill.js',
-  '/pwa.js',
+  '/skin/css/mobile-preview.css',
+  '/skin/css/wallpaper-details.css',
+  '/skin/css/vendor/all.min.css',
+  '/skin/css/vendor/bootstrap.min.css',
+  '/skin/js/vendor/jquery-3.7.1.min.js',
+  '/skin/js/site.js',
+  '/skin/js/visitor-counter.js',
+  '/skin/js/home.js',
+  '/skin/js/catalog.js',
+  '/skin/js/collection.js',
+  '/skin/js/ranking.js',
+  '/skin/js/skill.js',
+  '/skin/js/pwa.js',
   '/manifest.webmanifest',
-  '/skin/img/assets/logo.svg'
+  '/skin/img/assets/logo.svg',
+  '/skin/img/assets/logo-dragon-tail.png'
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
+  event.waitUntil((async () => {
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      const results = await Promise.allSettled(APP_SHELL.map(async url => {
+        const request = new Request(url, { cache: 'reload' });
+        const response = await fetch(request);
+        if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+        await cache.put(request, response);
+      }));
+      const skipped = results.reduce((count, result) => count + (result.status === 'rejected' ? 1 : 0), 0);
+      if (skipped) console.warn(`[Service Worker] Skipped ${skipped} unavailable precache resource(s).`);
+    } catch (error) {
+      console.warn('[Service Worker] Precache was unavailable; network mode remains active.', error);
+    }
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', event => {
@@ -40,7 +63,12 @@ async function networkFirst(request) {
     if (response.ok) cache.put(request, response.clone());
     return response;
   } catch {
-    return (await cache.match(request)) || (await cache.match('/offline.php'));
+    return (await cache.match(request))
+      || (await cache.match('/offline.php'))
+      || new Response('目前無法連線，請恢復網路後再試一次。', {
+        status: 503,
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+      });
   }
 }
 
@@ -50,7 +78,7 @@ async function staleWhileRevalidate(request) {
   const fresh = fetch(request).then(response => {
     if (response.ok) cache.put(request, response.clone());
     return response;
-  }).catch(() => cached);
+  }).catch(() => cached || Response.error());
   return cached || fresh;
 }
 
@@ -58,9 +86,13 @@ async function cacheFirst(request) {
   const cache = await caches.open(CACHE_NAME);
   const cached = await cache.match(request);
   if (cached) return cached;
-  const response = await fetch(request);
-  if (response.ok) cache.put(request, response.clone());
-  return response;
+  try {
+    const response = await fetch(request);
+    if (response.ok) cache.put(request, response.clone());
+    return response;
+  } catch {
+    return Response.error();
+  }
 }
 
 self.addEventListener('fetch', event => {
