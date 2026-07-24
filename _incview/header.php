@@ -17,10 +17,15 @@
 <link rel="stylesheet" href="skin/css/vendor/bootstrap.min.css">
 <link rel="stylesheet" href="skin/css/vendor/all.min.css">
 <link rel="stylesheet" href="skin/css/styles.css?v=<?= htmlspecialchars($styleVersion, ENT_QUOTES, 'UTF-8') ?>">
+<?php if ($pageKey === 'home'): ?><link rel="stylesheet" href="skin/css/home-minimal.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/home-minimal.css') ?: time()) ?>"><?php endif; ?>
+<?php if ($pageKey === 'advertising'): ?><link rel="stylesheet" href="skin/css/advertising.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/advertising.css') ?: time()) ?>"><link rel="stylesheet" href="skin/css/advertising-placement.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/advertising-placement.css') ?: time()) ?>"><?php endif; ?>
+<?php if ($pageKey === 'ads'): ?><link rel="stylesheet" href="skin/css/ads-admin.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/ads-admin.css') ?: time()) ?>"><?php endif; ?>
+<?php if ($pageKey === 'ranking'): ?><link rel="stylesheet" href="skin/css/ranking-dark.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/ranking-dark.css') ?: time()) ?>"><?php endif; ?>
 <?php if ($pageKey === 'search'): ?>
 <link rel="stylesheet" href="skin/css/mobile-preview.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/mobile-preview.css') ?: time()) ?>">
 <link rel="stylesheet" href="skin/css/wallpaper-details.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/wallpaper-details.css') ?: time()) ?>">
 <?php endif; ?>
+<link rel="stylesheet" href="skin/css/typography.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/typography.css') ?: time()) ?>">
 </head>
 <body class="<?= htmlspecialchars($pageBodyClass ?: $pageKey . '-page', ENT_QUOTES, 'UTF-8') ?>">
 <a class="skip-link" href="#main-content">跳至主要內容</a>
@@ -29,20 +34,19 @@
   <nav class="nav-shell" aria-label="主要導覽">
     <a class="brand" href="index.php" aria-label="帥龍萌姬桌布館首頁">
       <img class="brand-mark" src="skin/img/assets/logo-dragon-tail.png" alt="帥龍萌姬桌布館龍尾巴標誌" width="30" height="30">
-      <span>帥龍萌姬</span><small>桌布館</small>
+      <span>帥龍萌姬</span><small style="font-size:1.25rem">桌布館</small>
     </a>
-    <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNavLinks">
-      <i class="fa-solid fa-bars" aria-hidden="true"></i><span>選單</span>
-    </button>
+    <a class="nav-search-link<?= $pageKey === 'search' ? ' active' : '' ?>" href="search.php" aria-label="分類搜尋" title="分類搜尋"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="sr-only">分類搜尋</span></a>
     <div class="nav-links" id="primaryNavLinks">
-      <a href="index.php"<?= $pageKey === 'home' ? ' aria-current="page"' : '' ?>>首頁</a>
-      <a href="search.php"<?= $pageKey === 'search' ? ' aria-current="page"' : '' ?>>分類搜尋</a>
-      <a href="collection.php"<?= $pageKey === 'collection' ? ' aria-current="page"' : '' ?>>我的收藏</a>
       <a href="ranking.php"<?= $pageKey === 'ranking' ? ' aria-current="page"' : '' ?>>下載排行榜</a>
+      <a href="collection.php"<?= $pageKey === 'collection' ? ' aria-current="page"' : '' ?>><?php if ($pageKey === 'home'): ?><i class="fa-solid fa-heart favorite-heart-icon" aria-hidden="true"></i><?php endif; ?>我的收藏</a>
       <a href="qa.php"<?= $pageKey === 'qa' ? ' aria-current="page"' : '' ?>>QA</a>
       <a href="android-app.php"<?= $pageKey === 'app' ? ' aria-current="page"' : '' ?>><i class="fa-solid fa-mobile-screen-button nav-item-icon" aria-hidden="true"></i>下載 APK</a>
       <a class="mobile-only-nav" href="ai-skill.php"<?= $pageKey === 'skill' ? ' aria-current="page"' : '' ?>><i class="fa-solid fa-wand-magic-sparkles nav-item-icon" aria-hidden="true"></i>AI 安裝技能</a>
     </div>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNavLinks">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i><span>選單</span>
+    </button>
     <a class="nav-cta<?= $pageKey === 'skill' ? ' active' : '' ?>" href="ai-skill.php" aria-label="AI安裝技能：預覽與下載 SKILL.md"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i><span>AI安裝技能</span></a>
   </nav>
 </header>

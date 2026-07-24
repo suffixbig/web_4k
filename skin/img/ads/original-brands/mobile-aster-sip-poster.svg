@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title">
+  <title id="title">星野小飲 今晚也要閃閃喝</title>
+  <rect width="1080" height="760" fill="url(#fade)"/><defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#15102D" stop-opacity=".77"/><stop offset="1" stop-color="#15102D" stop-opacity="0"/></linearGradient></defs>
+  <g transform="translate(84 112)"><path d="M58 0l15 42 42 15-42 15-15 42-15-42L1 57l42-15z" fill="#FF75B5"/><path d="M99 78l7 19 20 7-20 7-7 20-7-20-20-7 20-7z" fill="#C4B5FD"/></g>
+  <text x="84" y="340" fill="#FDA4D4" font-family="Arial,sans-serif" font-size="27" font-weight="800" letter-spacing="8">ASTER SIP</text><text x="84" y="472" fill="#FFF3FA" font-family="'Microsoft JhengHei',sans-serif" font-size="102" font-weight="800">星野小飲</text><text x="91" y="548" fill="#EADCF2" font-family="'Microsoft JhengHei',sans-serif" font-size="41">今晚也要閃閃喝</text>
+</svg>

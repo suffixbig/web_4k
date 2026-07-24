@@ -14,7 +14,12 @@ $seoPages = [
     'sitemap' => ['title' => '網站地圖｜帥龍萌姬桌布館', 'description' => '帥龍萌姬桌布館的完整網站導覽與服務入口。', 'keywords' => '網站地圖,桌布分類,桌布排行榜', 'canonical' => 'https://4k.1-0.tw/sitemap.php'],
     'qa' => ['title' => '桌布館 QA｜帥龍萌姬桌布館', 'description' => '了解 AI 搜尋桌布、條件換桌布、手機直式桌布與 Android APK 的使用方式。', 'keywords' => '桌布QA,AI搜尋桌布,換桌布指令,手機桌布', 'canonical' => 'https://4k.1-0.tw/qa.php']
 ];
-$seo = $seoPages[$pageKey ?? 'home'];
+$seo = $seoPages[$pageKey ?? 'home'] ?? [
+    'title' => '4K.1-0.tw',
+    'description' => '4K 視覺內容平台。',
+    'keywords' => '4K,桌布',
+    'canonical' => 'https://4k.1-0.tw/'
+];
 $pageKey = $pageKey ?? 'home';
 $siteUrl = 'https://4k.1-0.tw';
 $structuredGraph = [

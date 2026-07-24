@@ -4,6 +4,7 @@ declare(strict_types=1);
 $pageKey = 'home';
 $pageScript = 'home.js';
 $pageBodyClass = 'home-page';
+require_once __DIR__ . '/_inc/ads.php';
 
 function homeAssetUrl(string $file): string {
     $normalized = ltrim(str_replace('\\', '/', $file), '/');
@@ -79,7 +80,7 @@ usort($latestWallpapers, static function (array $left, array $right): int {
     $dateResult = strcmp((string) ($right['created_at'] ?? ''), (string) ($left['created_at'] ?? ''));
     return $dateResult !== 0 ? $dateResult : ((int) ($right['id'] ?? 0) <=> (int) ($left['id'] ?? 0));
 });
-$latestWallpapers = array_slice($latestWallpapers, 0, 8);
+$latestWallpapers = array_slice($latestWallpapers, 0, 4);
 
 $popularWallpapers = $homeWallpapers;
 usort($popularWallpapers, static function (array $left, array $right): int {
@@ -89,7 +90,7 @@ usort($popularWallpapers, static function (array $left, array $right): int {
         ?: ((int) ($right['downloads'] ?? 0) <=> (int) ($left['downloads'] ?? 0))
         ?: ((int) ($right['views'] ?? 0) <=> (int) ($left['views'] ?? 0));
 });
-$popularWallpapers = array_slice($popularWallpapers, 0, 8);
+$popularWallpapers = array_slice($popularWallpapers, 0, 10);
 
 $wallpapersById = [];
 foreach ($homeWallpapers as $wallpaper) {
@@ -98,11 +99,11 @@ foreach ($homeWallpapers as $wallpaper) {
 
 // 首頁輪播固定使用目錄 ID 1–5；最新與熱門排序更新時不會跟著更換。
 $featureBlueprints = [
-    ['wallpaper_id' => '1', 'label' => 'FREE HD WALLPAPERS', 'nav' => '免費高畫質', 'title' => "免費高畫質桌布下載，\n手機與電腦都能用。", 'body' => '帥龍、萌姬、遊戲、奇幻與暗色風格集中於同一個可搜尋、可收藏、可排行的桌布空間；每張作品清楚標示實際解析度，找到喜歡的就能立即下載。', 'primary_href' => '#latestTitle', 'primary_label' => '看最新上架桌布', 'secondary_href' => 'search.php', 'secondary_label' => '開始搜尋桌布', 'icon' => 'fa-layer-group'],
-    ['wallpaper_id' => '2', 'label' => 'SMART SEARCH', 'nav' => '智慧搜尋', 'title' => "描述你想要的畫面，\n搜尋會理解條件。", 'body' => '輸入作者、色系、手機或電腦、橫式或直式、真人或 AI 等線索，就能快速縮小範圍，直接找到合適桌布。', 'primary_href' => 'search.php', 'primary_label' => '使用完整搜尋', 'secondary_href' => 'search.php?q=暗色護眼', 'secondary_label' => '試找暗色護眼', 'icon' => 'fa-magnifying-glass'],
-    ['wallpaper_id' => '3', 'label' => 'LIVE DISCOVERY', 'nav' => '最新熱門', 'title' => "每天看最新，\n也看大家真正喜歡什麼。", 'body' => '首頁固定呈現最新上架 8 張與熱門 8 張；熱門依按讚淨值、下載與瀏覽資料排序，讓好作品更容易被看見。', 'primary_href' => '#popularTitle', 'primary_label' => '查看本週熱門', 'secondary_href' => 'ranking.php', 'secondary_label' => '前往完整排行榜', 'icon' => 'fa-chart-line'],
-    ['wallpaper_id' => '4', 'label' => 'AI SKILL', 'nav' => 'AI 技能', 'title' => "一句「換桌布」，\nCodex 與 Claude 就能代勞。", 'body' => 'Codex 與 Claude 各有專用 SKILL.MD，可依你的條件搜尋網站桌布，也能在 Windows 上接手下一張與條件換圖。', 'primary_href' => 'ai-skill.php', 'primary_label' => '查看 AI 安裝技能', 'secondary_href' => 'ai-skill.php#skillPreview', 'secondary_label' => '預覽技能內容', 'icon' => 'fa-wand-magic-sparkles'],
-    ['wallpaper_id' => '5', 'label' => 'ANDROID APP', 'nav' => 'Android App', 'title' => "在手機搜尋、下載，\n再套用到主畫面或鎖定畫面。", 'body' => 'Android App 串接網站搜尋 API，支援最新 APK 下載，並可選擇兩者皆套、只套主畫面或只套鎖定畫面。', 'primary_href' => 'android-app.php', 'primary_label' => '下載最新版 APK', 'secondary_href' => 'collection.php', 'secondary_label' => '管理我的收藏', 'icon' => 'fa-mobile-screen-button'],
+    ['wallpaper_id' => '4', 'label' => 'AI 換桌布技能', 'nav' => 'AI 技能', 'title' => "技能安裝後，命令 ChatGPT「換桌布」，\n它就真的幫你換。", 'primary_href' => 'ai-skill.php', 'primary_label' => '安裝換桌布技能', 'icon' => 'fa-wand-magic-sparkles'],
+    ['wallpaper_id' => '1', 'label' => '免費桌布', 'nav' => '免費高畫質', 'title' => "免費 4K 桌布，\n立即下載。", 'primary_href' => '#latestTitle', 'primary_label' => '看最新桌布', 'icon' => 'fa-layer-group'],
+    ['wallpaper_id' => '2', 'label' => '智慧搜尋', 'nav' => '智慧搜尋', 'title' => "說出條件，\n快速找到桌布。", 'primary_href' => 'search.php', 'primary_label' => '開始搜尋', 'icon' => 'fa-magnifying-glass'],
+    ['wallpaper_id' => '3', 'label' => '熱門排行', 'nav' => '最新熱門', 'title' => "看看大家\n最愛的桌布。", 'primary_href' => 'ranking.php', 'primary_label' => '查看排行榜', 'icon' => 'fa-chart-line'],
+    ['wallpaper_id' => '5', 'label' => 'Android App', 'nav' => 'Android App', 'title' => "下載 App，\n直接套用桌布。", 'primary_href' => 'android-app.php', 'primary_label' => '下載 Android App', 'icon' => 'fa-mobile-screen-button'],
 ];
 
 $homeFeatureSlides = [];
@@ -118,11 +119,19 @@ require __DIR__ . '/_incview/header.php';
 <main id="main-content" tabindex="-1">
   <section class="home-feature-carousel" data-home-carousel aria-roledescription="carousel" aria-labelledby="homeHeroLabel">
     <p id="homeHeroLabel" class="sr-only">帥龍萌姬桌布館精選桌布與主要功能</p>
+    <div class="home-top-search" aria-labelledby="homeSearchTitle">
+      <div class="section home-top-search-layout">
+        <p class="home-top-search-title" id="homeSearchTitle">想找什麼桌布？</p>
+        <form class="home-search-panel" action="search.php" method="get" role="search">
+          <label class="sr-only" for="homeSearch">輸入想找的桌布條件</label>
+          <div><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="homeSearch" name="q" type="search" placeholder="例如：藍色、手機直式、AI 龍" autocomplete="off" enterkeyhint="search"><button type="submit">搜尋<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
+        </form>
+      </div>
+    </div>
     <div class="home-feature-track">
       <?php foreach ($homeFeatureSlides as $index => $feature):
           $wallpaper = $feature['wallpaper'];
           $wallpaperTitle = (string) ($wallpaper['title'] ?? '未命名桌布');
-          $creator = (string) ($wallpaper['creator'] ?? '未署名');
           $isActive = $index === 0;
       ?>
         <article class="home-feature-slide<?= $isActive ? ' is-active' : '' ?>" id="homeFeatureSlide<?= $index + 1 ?>"
@@ -142,53 +151,35 @@ require __DIR__ . '/_incview/header.php';
               <?php else: ?>
                 <h2><?= nl2br(htmlspecialchars((string) $feature['title'], ENT_QUOTES, 'UTF-8')) ?></h2>
               <?php endif; ?>
-              <p><?= htmlspecialchars((string) $feature['body'], ENT_QUOTES, 'UTF-8') ?></p>
               <div class="home-feature-actions">
                 <a class="button primary" href="<?= htmlspecialchars((string) $feature['primary_href'], ENT_QUOTES, 'UTF-8') ?>"><i class="fa-solid <?= htmlspecialchars((string) $feature['icon'], ENT_QUOTES, 'UTF-8') ?>" aria-hidden="true"></i><?= htmlspecialchars((string) $feature['primary_label'], ENT_QUOTES, 'UTF-8') ?></a>
-                <a class="home-feature-secondary" href="<?= htmlspecialchars((string) $feature['secondary_href'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars((string) $feature['secondary_label'], ENT_QUOTES, 'UTF-8') ?><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
               </div>
-              <a class="home-feature-credit" href="search.php?q=<?= rawurlencode($wallpaperTitle) ?>"><i class="fa-regular fa-image" aria-hidden="true"></i>本張桌布：<?= htmlspecialchars($wallpaperTitle, ENT_QUOTES, 'UTF-8') ?> · <?= htmlspecialchars($creator, ENT_QUOTES, 'UTF-8') ?></a>
             </div>
           </div>
         </article>
       <?php endforeach; ?>
     </div>
 
-    <div class="section home-feature-controls">
+    <div class="section home-feature-controls" aria-label="輪播控制">
+      <button id="homePrevSlide" class="home-feature-arrow" type="button" aria-label="顯示上一張專案特色"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
       <div class="home-feature-dots" aria-label="選擇專案特色">
         <?php foreach ($homeFeatureSlides as $index => $feature): ?>
           <button class="<?= $index === 0 ? 'is-active' : '' ?>" type="button" data-home-go-slide="<?= $index ?>"
                   aria-controls="homeFeatureSlide<?= $index + 1 ?>" aria-current="<?= $index === 0 ? 'true' : 'false' ?>"
                   aria-label="顯示第 <?= $index + 1 ?> 張：<?= htmlspecialchars((string) $feature['nav'], ENT_QUOTES, 'UTF-8') ?>">
-            <span>0<?= $index + 1 ?></span><small><?= htmlspecialchars((string) $feature['nav'], ENT_QUOTES, 'UTF-8') ?></small>
+            <span class="sr-only">第 <?= $index + 1 ?> 張：<?= htmlspecialchars((string) $feature['nav'], ENT_QUOTES, 'UTF-8') ?></span>
           </button>
         <?php endforeach; ?>
       </div>
-      <div class="home-feature-buttons">
-        <button id="homePrevSlide" type="button" aria-label="顯示上一張專案特色"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
-        <button id="homeCarouselToggle" class="home-carousel-toggle" type="button" aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i><span>暫停</span></button>
-        <button id="homeNextSlide" type="button" aria-label="顯示下一張專案特色"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
-      </div>
+      <button id="homeNextSlide" class="home-feature-arrow" type="button" aria-label="顯示下一張專案特色"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
     </div>
     <p id="homeSlideStatus" class="sr-only" aria-live="polite" aria-atomic="true"></p>
   </section>
 
-  <section class="home-search-strip" aria-labelledby="homeSearchTitle">
-    <div class="section home-search-strip-layout">
-      <div class="home-search-intro"><span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span><div><p class="section-label">SEARCH THE COLLECTION</p><h2 id="homeSearchTitle">一句話，搜尋整座桌布館。</h2><p>作者、色系、裝置、橫直式與創作類型都能直接描述。</p></div></div>
-      <div>
-        <form class="home-search-panel" action="search.php" method="get" role="search">
-          <label for="homeSearch">輸入想找的桌布條件</label>
-          <div><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="homeSearch" name="q" type="search" placeholder="例如：藍色手機直式 AI 龍" autocomplete="off" enterkeyhint="search"><button type="submit">搜尋桌布<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
-          <p>搜尋會帶你到完整結果頁，並保留輸入的條件。</p>
-        </form>
-        <nav class="home-quick-search" aria-label="熱門搜尋建議"><span>快速找：</span><a href="search.php?q=暗色護眼">暗色護眼</a><a href="search.php?q=手機直式">手機直式</a><a href="search.php?q=帥龍奇幻">帥龍奇幻</a><a href="search.php?q=幸福仙境">幸福仙境</a></nav>
-      </div>
-    </div>
-  </section>
+  <?= renderAdPlacement('home_banner', 'section ad-slot--home') ?>
 
   <section class="home-gallery-section section" aria-labelledby="latestTitle" data-home-list="latest">
-    <div class="home-gallery-head"><div><p class="section-label">LATEST WALLPAPERS</p><h2 id="latestTitle">最新上架的 8 張桌布</h2><p>依發布日期由新到舊排列，每次回到首頁都能先看到剛加入的作品。</p></div><a class="button outline" href="search.php">查看全部桌布<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+    <div class="home-gallery-head"><div><h2 id="latestTitle">最新上架</h2></div><a class="button outline" href="search.php">查看全部桌布<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
     <div class="home-wallpaper-grid">
       <?php if ($latestWallpapers === []): ?><div class="home-gallery-empty"><i class="fa-solid fa-image" aria-hidden="true"></i><h3>暫時沒有最新桌布</h3><p>請稍後重新整理，或先前往完整桌布目錄。</p></div><?php endif; ?>
       <?php foreach ($latestWallpapers as $index => $wallpaper) echo homeWallpaperCard($wallpaper, 'latest', $index); ?>
@@ -197,7 +188,7 @@ require __DIR__ . '/_incview/header.php';
 
   <section class="home-popular-band" aria-labelledby="popularTitle" data-home-list="popular">
     <div class="section home-gallery-section">
-      <div class="home-gallery-head"><div><p class="section-label">TRENDING NOW</p><h2 id="popularTitle">現在最熱門的 8 張桌布</h2><p>依按讚淨值排序，下載與瀏覽數作為同分依據，呈現大家真正喜歡的作品。</p></div><a class="button outline" href="ranking.php">前往完整排行榜<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+      <div class="home-gallery-head"><div><h2 id="popularTitle">熱門桌布</h2></div><a class="button outline" href="ranking.php">前往完整排行榜<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
       <div class="home-wallpaper-grid">
         <?php if ($popularWallpapers === []): ?><div class="home-gallery-empty"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><h3>熱門統計準備中</h3><p>桌布仍可從完整目錄瀏覽與下載。</p></div><?php endif; ?>
         <?php foreach ($popularWallpapers as $index => $wallpaper) echo homeWallpaperCard($wallpaper, 'popular', $index); ?>
@@ -205,24 +196,27 @@ require __DIR__ . '/_incview/header.php';
     </div>
   </section>
 
-  <section class="ai-section section" id="ai">
-    <div class="ai-card">
-      <div class="ai-copy">
-        <p class="section-label">AI WALLPAPER SKILL</p>
-        <h2>先在首頁找到喜歡的，<br><span>之後交給 AI 幫你換。</span></h2>
-        <p>Codex 與 Claude 技能支援自然語言搜尋與本機 Windows 換桌布；Android App 則可搜尋、下載並套用主畫面或鎖定畫面。</p>
-        <div class="prompt-box"><div><i data-lucide="terminal"></i><code id="skillPrompt">幫我安裝帥龍萌姬桌布館技能，以後我說「換桌布」或「搜尋桌布」時就依技能規則執行。</code></div><button id="copyPrompt" type="button" aria-label="複製 AI 安裝指令"><i data-lucide="copy"></i><span>複製指令</span></button></div>
-        <div class="ai-actions"><a class="button primary" href="ai-skill.php"><i data-lucide="sparkles"></i>前往技能啟用頁</a><a href="android-app.php">下載 Android App <i data-lucide="arrow-up-right"></i></a></div>
-      </div>
-      <div class="automation-card">
-        <div class="automation-top"><div class="ai-orb"><i data-lucide="bot"></i></div><div><small>WALLPAPER AI SKILL</small><strong>一句話搜尋與換圖</strong></div><span class="status">可安裝</span></div>
-        <div class="schedule-row"><span><i data-lucide="search"></i> 範例指令</span><strong>搜尋桌布 藍色手機直式</strong></div>
-        <div class="preference"><span>AI 可辨識這些條件</span><div><b>作者</b><b>色系</b><b>裝置</b><b>橫直式</b></div></div>
-        <?php if ($popularWallpapers !== []): $featured = $popularWallpapers[0]; ?><div class="next-wallpaper"><img src="<?= htmlspecialchars((string) $featured['home_file'], ENT_QUOTES, 'UTF-8') ?>" alt="熱門桌布<?= htmlspecialchars((string) $featured['title'], ENT_QUOTES, 'UTF-8') ?>" loading="lazy"><div><small>MOST POPULAR</small><strong><?= htmlspecialchars((string) $featured['title'], ENT_QUOTES, 'UTF-8') ?></strong><span><?= number_format((int) $featured['downloads']) ?> 次下載</span></div><i data-lucide="chevron-right"></i></div><?php endif; ?>
-      </div>
+  <section class="ai-section section" id="ai" aria-labelledby="homeAiTitle">
+    <h2 class="sr-only" id="homeAiTitle">電腦換桌布技能與手機桌布 APK</h2>
+    <div class="ai-skill-posters">
+      <a class="ai-skill-poster" href="ai-skill.php" aria-label="前往安裝 ChatGPT 電腦換桌布技能">
+        <img src="skin/img/assets/chatgpt-wallpaper-pc-skill-poster-v1.jpg"
+             alt="電腦螢幕展示三張桌布，說明安裝 ChatGPT 換桌布技能後，只要說一聲換桌布就會自動更換"
+             width="1672" height="941" loading="lazy" decoding="async">
+      </a>
+      <a class="ai-skill-poster" href="android-app.php" aria-label="前往下載手機桌布 APK">
+        <img src="skin/img/assets/wallpaper-apk-mobile-poster-v1.jpg"
+             alt="黑豹吉祥物展示手機鎖定畫面與完整 App 主桌面，說明安裝 APK 後可以固定桌布或每天隨機換桌布"
+             width="1672" height="941" loading="lazy" decoding="async">
+      </a>
     </div>
   </section>
 
-  <section class="home-links section" aria-label="更多桌布功能"><a href="search.php"><i data-lucide="search"></i><div><small>完整搜尋</small><strong>用所有條件找到桌布</strong></div><i data-lucide="arrow-right"></i></a><a href="collection.php"><i data-lucide="heart"></i><div><small>我的收藏</small><strong>編輯 AI 輪播清單</strong></div><i data-lucide="arrow-right"></i></a><a href="ranking.php"><i data-lucide="trophy"></i><div><small>下載排行榜</small><strong>看看大家正在用什麼</strong></div><i data-lucide="arrow-right"></i></a></section>
+  <nav class="home-links section" aria-label="更多桌布功能">
+    <a href="search.php"><i data-lucide="search" aria-hidden="true"></i><div><small>完整搜尋</small><strong>用所有條件找到桌布</strong></div><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+    <a href="collection.php"><i data-lucide="heart" aria-hidden="true"></i><div><small>我的收藏</small><strong>保存喜歡的作品</strong></div><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+    <a href="ranking.php"><i data-lucide="trophy" aria-hidden="true"></i><div><small>下載排行榜</small><strong>查看前 100 名桌布</strong></div><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+  </nav>
+
 </main>
 <?php require __DIR__ . '/_incview/footer.php'; ?>

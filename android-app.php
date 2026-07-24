@@ -3,8 +3,8 @@ declare(strict_types=1);
 $pageKey = 'app';
 $pageBodyClass = 'android-app-page';
 $versionPath = __DIR__ . '/downloads/apk/VERSION';
-$appVersion = is_file($versionPath) ? trim((string) file_get_contents($versionPath)) : 'v2.4.0';
-$safeVersion = preg_match('/^v[\d.]+$/', $appVersion) ? $appVersion : 'v2.4.0';
+$appVersion = is_file($versionPath) ? trim((string) file_get_contents($versionPath)) : 'v2.7.0';
+$safeVersion = preg_match('/^v[\d.]+$/', $appVersion) ? $appVersion : 'v2.7.0';
 $apkRelativePath = 'downloads/apk/dragon-maiden-wallpaper-' . $safeVersion . '.apk';
 $apkPath = __DIR__ . '/' . $apkRelativePath;
 $apkExists = is_file($apkPath);
@@ -20,7 +20,7 @@ require __DIR__ . '/_incview/header.php';
       <div class="app-hero-copy">
         <p class="section-label">ANDROID WALLPAPER APP · <?= htmlspecialchars($safeVersion, ENT_QUOTES, 'UTF-8') ?></p>
         <h1>把整座桌布館<br><span>裝進手機。</span></h1>
-        <p>無廣告、免帳號。v2.4 把搜尋移到首屏，搭配快速籤與可收合的進階條件；橫圖跨整列、直圖雙欄顯示，點選後從底部面板完成預覽、下載與套用。</p>
+        <p>無廣告、免帳號。v2.7 讓每張桌布都有按讚、倒讚、收藏與下載；投票數與網站統計同步，並保留單列色票、滿寬排序和主畫面／鎖定畫面的正確套用規則。</p>
         <div class="app-badges"><span><i class="fa-brands fa-android" aria-hidden="true"></i>Android 8.0+</span><span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i>僅連線本站</span><span><i class="fa-solid fa-ban" aria-hidden="true"></i>無廣告</span></div>
         <div class="app-hero-actions">
           <?php if ($apkExists): ?><a class="button primary" href="<?= htmlspecialchars($apkRelativePath, ENT_QUOTES, 'UTF-8') ?>" download><i class="fa-solid fa-download" aria-hidden="true"></i>下載 APK <?= htmlspecialchars($safeVersion, ENT_QUOTES, 'UTF-8') ?></a><?php else: ?><span class="button primary disabled" aria-disabled="true">APK 建置中</span><?php endif; ?>
@@ -29,7 +29,7 @@ require __DIR__ . '/_incview/header.php';
         <p class="app-build-note">檔案 <?= htmlspecialchars($apkSize, ENT_QUOTES, 'UTF-8') ?> · 更新 <?= htmlspecialchars($apkUpdatedAt, ENT_QUOTES, 'UTF-8') ?> · 測試簽章版</p>
       </div>
       <div class="app-phone-stage" aria-label="手機 App 介面示意">
-        <div class="app-phone"><div class="app-phone-speaker"></div><div class="app-phone-screen"><img src="skin/img/assets/mobile/mobile-01.jpg" alt="翠嶺龍息手機桌布預覽"><div class="app-phone-shade"></div><div class="app-phone-ui"><small>PREVIEW &amp; APPLY</small><strong>翠嶺龍息</strong><span>AI 幻境 · 941 × 1672</span><p class="app-phone-targets"><i class="active">兩者皆套</i><i>主畫面</i><i>鎖定畫面</i></p><p class="app-phone-crop"><span>完整顯示（推薦）</span><i aria-hidden="true"></i></p><div><b>立即套用</b><b>下載圖片</b></div></div></div></div>
+        <div class="app-phone"><div class="app-phone-speaker"></div><div class="app-phone-screen"><img src="skin/img/assets/mobile/mobile-01.jpg" alt="翠嶺龍息手機桌布預覽"><div class="app-phone-shade"></div><div class="app-phone-ui"><small>PREVIEW &amp; APPLY</small><strong>翠嶺龍息</strong><span>AI 幻境 · 941 × 1672</span><p class="app-phone-targets"><i class="active">兩者皆套</i><i>主畫面</i><i>鎖定畫面</i></p><p class="app-phone-crop"><span>主畫面高度滿版</span><i aria-hidden="true"></i></p><div><b>立即套用</b><b>下載圖片</b></div></div></div></div>
       </div>
     </div>
   </section>
@@ -37,13 +37,13 @@ require __DIR__ . '/_incview/header.php';
   <section class="app-features section" id="features">
     <div class="section-head"><div><p class="section-label">SEARCH TO APPLY</p><h2>從完整搜尋，<br>一路做到套用。</h2></div><p>搜尋條件與網站桌布目錄同步，找到作品後直接預覽、下載，或選擇手機桌布套用位置。</p></div>
     <div class="app-feature-grid">
-      <article class="feature-wide"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>首屏搜尋與漸進篩選</h3><p>支援搜尋自動完成、推薦關鍵字與直式／橫式／AI 快速籤；分類、色系與排序需要時再展開。結果採橫圖整列、直圖雙欄混合網格。</p></article>
-      <article class="feature-tall"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i><h3>底部套用面板</h3><p>點選作品後，預覽與操作從螢幕下方出現。</p><ul><li>兩者皆套／主畫面／鎖定畫面</li><li>完整顯示／填滿螢幕</li><li>下載與套用進度</li></ul></article>
-      <article><i class="fa-solid fa-crop-simple" aria-hidden="true"></i><h3>完整顯示為預設</h3><p>橫圖可完整置中、不切左右內容；若想鋪滿手機，也能改選填滿螢幕並在套用前看懂差異。</p></article>
-      <article><i class="fa-solid fa-images" aria-hidden="true"></i><h3>目前設定雙預覽</h3><p>主畫面與鎖定畫面會標示使用中狀態、最後確認時間；可重新確認，也能點縮圖全螢幕查看。</p></article>
+      <article class="feature-wide"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>首屏搜尋與視覺篩選</h3><p>支援搜尋自動完成與推薦關鍵字；比例列固定為全部／橫式／直式，排序使用獨立滿寬下拉。色系改成彩色圓盤加九種單列色票，可直接辨識與選取。</p></article>
+      <article class="feature-tall"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i><h3>每張桌布都有完整操作</h3><p>點選任何作品後，預覽與操作從螢幕下方出現。</p><ul><li>按讚、倒讚、收藏與下載</li><li>兩者皆套／主畫面／鎖定畫面</li><li>主畫面高度滿版／直式填滿</li><li>鎖定畫面固定直式裁切</li></ul></article>
+      <article><i class="fa-solid fa-crop-simple" aria-hidden="true"></i><h3>主畫面高度滿版</h3><p>完整橫圖依手機高度滿版，不再產生上下留白；若選直式填滿，才會裁切左右內容。</p></article>
+      <article><i class="fa-solid fa-images" aria-hidden="true"></i><h3>系統實際／動態預覽</h3><p>靜態桌布在支援版本可直接讀取；動態桌布顯示服務縮圖，並能開啟 Android 系統真正繪製的目前主畫面動畫。</p></article>
     </div>
   </section>
-  <section class="app-trust"><div class="section app-trust-grid"><div><p class="section-label">PRIVACY &amp; PERMISSIONS</p><h2>權限用在哪，<br>全部說清楚。</h2><p>App 不含廣告 SDK、不建立帳號，也不讀取聯絡人或使用者既有相簿內容。底部縮圖只使用 App 自己最近套用且經系統識別碼確認的版本。</p></div><div class="permission-list"><article><i class="fa-solid fa-wifi" aria-hidden="true"></i><span><strong>網路</strong><small>讀取本站目錄與下載所選桌布</small></span></article><article><i class="fa-solid fa-display" aria-hidden="true"></i><span><strong>設定桌布</strong><small>只有按下「立即套用」時使用</small></span></article><article><i class="fa-solid fa-folder-open" aria-hidden="true"></i><span><strong>舊版儲存空間</strong><small>只有 Android 8／9 首次下載圖片時詢問</small></span></article></div></div></section>
+  <section class="app-trust"><div class="section app-trust-grid"><div><p class="section-label">PRIVACY &amp; PERMISSIONS</p><h2>權限用在哪，<br>全部說清楚。</h2><p>App 不含廣告 SDK、不建立帳號，也不讀取聯絡人或使用者相簿。Android 13+ 遵守系統限制，不使用「所有檔案存取權」繞過桌布原圖保護。</p></div><div class="permission-list"><article><i class="fa-solid fa-wifi" aria-hidden="true"></i><span><strong>網路</strong><small>讀取本站目錄與下載所選桌布</small></span></article><article><i class="fa-solid fa-display" aria-hidden="true"></i><span><strong>設定桌布</strong><small>只有按下「立即套用」時使用</small></span></article><article><i class="fa-solid fa-photo-film" aria-hidden="true"></i><span><strong>目前靜態桌布</strong><small>只有 Android 12 以下按重新確認時詢問</small></span></article></div></div></section>
   <section class="app-install section" id="download">
     <div class="section-head"><div><p class="section-label">INSTALL APK</p><h2>三步驟開始使用</h2></div><p>本站直接提供 APK，Android 第一次安裝時可能要求允許瀏覽器安裝未知來源 App。</p></div>
     <div class="install-cards"><article><b>1</b><h3>下載 APK</h3><p>按下載並保留安裝檔。</p></article><article><b>2</b><h3>允許本次安裝</h3><p>依 Android 提示允許目前瀏覽器安裝。</p></article><article><b>3</b><h3>搜尋並套用</h3><p>搜尋作品、選擇套用位置，再按立即套用。</p></article></div>

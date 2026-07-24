@@ -78,7 +78,7 @@ const cases = [
   await featurePage.locator('[data-library="all"]').click();
   await featurePage.locator("#collectionGrid article").first().waitFor();
   const collectionItems = await featurePage.locator("#collectionGrid article").count();
-  const featuresPassed = rankingItems === expectedCatalogItems && collectionItems === expectedCatalogItems && pageErrors.length === 0;
+  const featuresPassed = rankingItems === 50 && collectionItems === expectedCatalogItems && pageErrors.length === 0;
   failed ||= !featuresPassed;
   console.log(JSON.stringify({ name: "json-feature-pages", passed: featuresPassed, rankingItems, collectionItems, pageErrors }));
   await featurePage.close();

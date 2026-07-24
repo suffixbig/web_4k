@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="250" viewBox="0 0 1200 250" role="img" aria-labelledby="title">
+  <title id="title">潮汐冷萃 低溫慢萃，自在清醒</title>
+  <rect width="790" height="250" fill="url(#fade)"/><defs><linearGradient id="fade" x1="0" x2="1"><stop stop-color="#062C38"/><stop offset=".72" stop-color="#062C38" stop-opacity=".93"/><stop offset="1" stop-color="#062C38" stop-opacity="0"/></linearGradient></defs>
+  <g transform="translate(60 38)"><path d="M4 76c17-43 45-59 71-49 14 6 19 20 18 36 15-16 34-16 48-3-12 39-40 58-77 58-35 0-64-16-60-42z" fill="#38D6D0"/><path d="M19 82c14-16 28-18 42-6 13 13 26 12 40-5" fill="none" stroke="#E0FFFF" stroke-width="7" stroke-linecap="round"/></g>
+  <text x="205" y="108" fill="#5EEAD4" font-family="Arial,sans-serif" font-size="16" font-weight="800" letter-spacing="5">TIDE BREW</text><text x="205" y="169" fill="#FFF" font-family="'Microsoft JhengHei',sans-serif" font-size="51" font-weight="800">潮汐冷萃</text><text x="208" y="211" fill="#D7F9FB" font-family="'Microsoft JhengHei',sans-serif" font-size="23">低溫慢萃，自在清醒</text>
+</svg>

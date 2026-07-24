@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" role="img" aria-labelledby="title desc">
+  <title id="title">晴柚茶研 Logo</title><desc id="desc">黃綠色柚子與茶葉標誌</desc>
+  <rect width="640" height="260" rx="42" fill="#101820"/>
+  <circle cx="112" cy="130" r="72" fill="#D9FF32"/><circle cx="112" cy="130" r="49" fill="#FFF9D7"/>
+  <path d="M112 59c18-26 56-25 68-3-34 12-49 26-68 48z" fill="#66C94B"/>
+  <path d="M80 130h64M112 98v64M89 107l46 46M135 107l-46 46" stroke="#F6C344" stroke-width="10" stroke-linecap="round"/>
+  <text x="214" y="112" fill="#F7FAF1" font-family="'Microsoft JhengHei',sans-serif" font-size="52" font-weight="800">晴柚茶研</text>
+  <text x="218" y="154" fill="#D9FF32" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="5">SUNYU LAB</text>
+  <text x="218" y="190" fill="#9FB19D" font-family="Arial,sans-serif" font-size="17" letter-spacing="3">FRESH TEA STUDIO</text>
+</svg>

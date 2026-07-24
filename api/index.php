@@ -28,13 +28,14 @@ $endpoint = $pathParts[0] ?? ($_REQUEST['endpoint'] ?? '');
 $action = $pathParts[1] ?? ($_REQUEST['action'] ?? '');
 
 switch ($endpoint) {
-    case '': sendSuccess(['version' => API_VERSION, 'endpoints' => ['catalog', 'stats', 'preferences', 'automation', 'users', 'contributions']], 'API service is healthy'); break;
+    case '': sendSuccess(['version' => API_VERSION, 'endpoints' => ['catalog', 'stats', 'preferences', 'automation', 'users', 'contributions', 'ads']], 'API service is healthy'); break;
     case 'catalog': require __DIR__ . '/v_catalog.php'; break;
     case 'stats': require __DIR__ . '/v_stats.php'; break;
     case 'preferences': require __DIR__ . '/v_preferences.php'; break;
     case 'automation': require __DIR__ . '/v_automation.php'; break;
     case 'users': require __DIR__ . '/v_users.php'; break;
     case 'contributions': require __DIR__ . '/v_contributions.php'; break;
+    case 'ads': require __DIR__ . '/v_ads.php'; break;
     case 'help': sendSuccess(['version' => API_VERSION, 'endpoints' => ['catalog', 'stats', 'preferences', 'automation', 'users']], 'API service is healthy'); break;
     default: sendError('Endpoint not found: ' . ($endpoint ?: '(empty)'), 404);
 }

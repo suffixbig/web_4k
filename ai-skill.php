@@ -11,7 +11,7 @@ foreach (['codex' => 'Codex', 'claude' => 'Claude'] as $platformKey => $platform
     $versionFile = is_file($versionPath) ? trim((string) file_get_contents($versionPath)) : '';
     $version = preg_match('/^v[\d.]+$/i', $versionFile)
         ? $versionFile
-        : (preg_match('/Skill version:\s*(v[\d.]+)/i', $markdown, $matches) ? $matches[1] : 'v1.115');
+        : (preg_match('/Skill version:\s*(v[\d.]+)/i', $markdown, $matches) ? $matches[1] : 'v1.116');
     $skillPlatforms[$platformKey] = [
         'name' => $platformName,
         'path' => $relativePath,
@@ -28,6 +28,12 @@ require __DIR__ . '/_incview/header.php';
 <!-- 主要內容 STAR -->
 <main id="main-content" tabindex="-1">
     <section class="skill-hero"><div class="section"><div><p class="section-label">ONE SENTENCE WALLPAPER SKILL</p><h1>讓我的 AI 學會<br><span>一句話換桌布。</span></h1><p>不用自己下載與打開設定。告訴 Codex 或 Claude 想要什麼，它會搜尋本站 API、下載正確尺寸並替你套用。</p><div class="platform-badges"><span><i data-lucide="terminal-square"></i>Codex</span><span><i data-lucide="bot"></i>Claude</span><em>僅限這兩個平台</em></div></div><div class="skill-demo"><small>YOU</small><p>幫我換一張暗色的帥龍 4K 桌布</p><small>CODEX / CLAUDE</small><div><i data-lucide="circle-check-big"></i><span><strong>已換好桌布</strong>使用「暗夜龍魂」· 1920 × 1080</span></div></div></div></section>
+    <section class="skill-proof-poster section" aria-labelledby="skillProofPosterTitle">
+      <h2 class="sr-only" id="skillProofPosterTitle">Codex 實際執行換桌布技能</h2>
+      <img src="skin/img/assets/ai-skill-codex-panther-poster-v1.jpg"
+           alt="黑豹吉祥物指向真實 Codex 畫面，畫面顯示換桌布技能已套用作品並完成網站偏好更新"
+           width="1672" height="941" loading="lazy" decoding="async">
+    </section>
     <section class="install-section section" id="install">
       <div class="section-head"><div><p class="section-label">INSTALL SKILL</p><h2>選擇你的 AI</h2></div><p>安裝後可說「換桌布 墨凡的畫」隨機套用符合條件的作品，或說「搜桌布 墨凡」直接開啟搜尋結果。</p></div>
       <div class="platform-tabs" role="tablist" aria-label="選擇 AI 平台"><button class="active" id="codexTab" role="tab" aria-selected="true" aria-controls="skillPlatformPanel" tabindex="0" data-platform="codex">Codex</button><button id="claudeTab" role="tab" aria-selected="false" aria-controls="skillPlatformPanel" tabindex="-1" data-platform="claude">Claude</button></div>

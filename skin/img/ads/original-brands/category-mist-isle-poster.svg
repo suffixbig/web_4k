@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title">
+  <title id="title">霧島果釀 果香漫進霧裡</title>
+  <rect width="690" height="300" fill="url(#fade)"/><defs><linearGradient id="fade" x1="0" x2="1"><stop stop-color="#261847"/><stop offset=".78" stop-color="#261847" stop-opacity=".88"/><stop offset="1" stop-color="#261847" stop-opacity="0"/></linearGradient></defs>
+  <g transform="translate(66 53)"><circle cx="43" cy="48" r="31" fill="#F7D6FF"/><circle cx="84" cy="32" r="35" fill="#E9D5FF"/><circle cx="103" cy="76" r="27" fill="#D8B4FE"/><path d="M58 14c19-26 47-31 68-18-9 24-29 39-57 42z" fill="#6EE7B7"/></g>
+  <text x="205" y="151" fill="#E9D5FF" font-family="Arial,sans-serif" font-size="17" font-weight="800" letter-spacing="5">MIST ISLE</text><text x="205" y="214" fill="#FFF" font-family="'Microsoft JhengHei',sans-serif" font-size="58" font-weight="800">霧島果釀</text><text x="208" y="258" fill="#F4E9FF" font-family="'Microsoft JhengHei',sans-serif" font-size="27">果香漫進霧裡</text>
+</svg>

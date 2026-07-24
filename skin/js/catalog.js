@@ -279,6 +279,14 @@ function fillDialog(wallpaper) {
   $('#dialogFavorite').setAttribute('aria-label', `${profile.favorites.includes(wallpaper.id) ? '取消收藏' : '收藏'} ${wallpaper.title}`);
   $('#dialogDownload').href = wallpaper.download_url || wallpaper.file;
   $('#dialogDownload').download = `帥龍萌姬桌布館-${wallpaper.title}.jpg`;
+  const detailMarkup = $('#catalogDetailAdMarkup');
+  const existingAd = dialog.querySelector('[data-dialog-ad]');
+  if (detailMarkup?.innerHTML && !existingAd) {
+    const mount = document.createElement('div');
+    mount.dataset.dialogAd = 'true';
+    mount.innerHTML = detailMarkup.innerHTML;
+    dialog.querySelector('.dialog-info').before(mount);
+  }
   $('#dialogPosition').textContent = `${previewIndex + 1} / ${previewList.length}`;
   $('#dialogPrev').disabled = !hasMultiple;
   $('#dialogNext').disabled = !hasMultiple;
@@ -294,6 +302,11 @@ function moveDialog(offset) {
   const nextWallpaper = previewList[nextIndex];
   fillDialog(nextWallpaper);
   statsAction(nextWallpaper.id, 'view').catch(() => {});
+}
+
+function showDownloadAd() {
+  const adDialog = $('#downloadAdDialog');
+  if (adDialog?.querySelector('.ad-slot') && !adDialog.open) adDialog.showModal();
 }
 
 async function vote(id, type, button) {
@@ -486,6 +499,7 @@ document.addEventListener('click', async event => {
     anchor.download = `帥龍萌姬桌布館-${wallpaper.title}.jpg`;
     anchor.click();
     statsAction(wallpaper.id, 'download').then(render).catch(() => {});
+    showDownloadAd();
   }
 });
 
@@ -576,6 +590,9 @@ $('#dialogLike').addEventListener('click', event => active && vote(active.id, 'l
 $('#dialogDislike').addEventListener('click', event => active && vote(active.id, 'dislike', event.currentTarget));
 $('#dialogFavorite').addEventListener('click', () => active && preferenceAction('favorite_toggle', active.id).then(() => { fillDialog(active); showToast('收藏已更新'); }));
 $('#dialogDownload').addEventListener('click', () => active && statsAction(active.id, 'download').then(render).catch(() => {}));
+$('#dialogDownload').addEventListener('click', () => showDownloadAd());
+$('#closeDownloadAd')?.addEventListener('click', () => $('#downloadAdDialog')?.close());
+$('#downloadAdDialog')?.addEventListener('click', event => { if (event.target === event.currentTarget) event.currentTarget.close(); });
 
 async function loadCatalog() {
   renderSkeleton();

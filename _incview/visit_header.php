@@ -10,6 +10,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <link rel="stylesheet" href="skin/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="skin/vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="skin/css/visit_dark_theme.css?v=<?=CSSJSVERSION?>">
+<link rel="stylesheet" href="skin/css/typography.css?v=<?= (string) (@filemtime(__DIR__ . '/../skin/css/typography.css') ?: time()) ?>">
 <script src="skin/vendor/chart/chart.umd.min.js"></script>
 </head>
 <body>

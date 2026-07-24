@@ -1,4 +1,5 @@
-<div align="center">
+本機可以用 http://4k.test.com/index.php 瀏覽顯示結果
+
 
 # 帥龍萌姬桌布館
 

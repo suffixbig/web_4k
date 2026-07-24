@@ -50,10 +50,12 @@ const baseUrl = process.env.SITE_URL || "http://127.0.0.1:8788";
     && legacyResponse.status() === 404
     && codexResponse.status() === 200
     && claudeResponse.status() === 200
-    && (await codexVersionResponse.text()).trim() === "v1.115"
-    && (await claudeVersionResponse.text()).trim() === "v1.115"
-    && codexPreview.includes("Skill version: v1.115")
-    && claudeState.preview.includes("Skill version: v1.115")
+    && (await codexVersionResponse.text()).trim() === "v1.116"
+    && (await claudeVersionResponse.text()).trim() === "v1.116"
+    && codexPreview.includes("Skill version: v1.116")
+    && claudeState.preview.includes("Skill version: v1.116")
+    && codexPreview.includes("device=pc&orientation=landscape")
+    && claudeState.preview.includes("device=pc&orientation=landscape")
     && mobileState.scrollWidth <= mobileState.viewport
     && mobileState.claudePreview;
 

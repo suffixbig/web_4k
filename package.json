@@ -17,6 +17,7 @@
     "test:ai-skill": "node tests/ai-skill-check.cjs",
     "test:android-app": "node tests/android-app-check.cjs",
     "test:home": "node tests/home-check.cjs",
+    "test:ranking": "node tests/ranking-check.cjs",
     "test:search-ux": "node tests/search-ux-check.cjs",
     "test:seo": "node tests/seo-check.cjs",
     "test:pwa-csp": "node tests/pwa-csp-check.cjs",

@@ -1,0 +1,93 @@
+:root {
+  --font-size-min: 0.9375rem;
+}
+
+html {
+  font-size: 100%;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-size: 1rem;
+}
+
+small,
+.small,
+.form-text,
+.form-label,
+.form-check-label,
+.valid-feedback,
+.invalid-feedback,
+.dropdown-header,
+.badge,
+.btn-sm,
+.form-control-sm,
+.page-link,
+figcaption,
+caption,
+sub,
+sup,
+code,
+kbd,
+pre {
+  font-size: var(--font-size-min) !important;
+}
+
+/* Large-type responsive guards: keep horizontal scrollers inside the viewport. */
+.category-scroll-shell,
+.install-layout,
+.install-steps,
+.install-command,
+.docs-shell,
+.docs-nav,
+.docs-content {
+  min-width: 0;
+}
+
+.home-wallpaper-badge,
+.home-wallpaper-device {
+  max-width: calc(100% - 1.25rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-wallpaper-device {
+  top: auto;
+  bottom: 0.625rem;
+  min-height: 1.25rem;
+  padding-inline: 0.3125rem;
+  font-size: 0.625rem !important;
+  letter-spacing: 0.04em;
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .category-scroll-shell {
+    margin-right: 0;
+    overflow: hidden;
+  }
+
+  .category-chips {
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .install-layout,
+  .install-steps,
+  .install-command,
+  .docs-shell,
+  .docs-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .docs-nav {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

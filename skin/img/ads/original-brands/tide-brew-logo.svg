@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" role="img" aria-labelledby="title desc">
+  <title id="title">潮汐冷萃 Logo</title><desc id="desc">青藍色浪花與冷萃杯標誌</desc>
+  <rect width="640" height="260" rx="42" fill="#072B38"/>
+  <path d="M52 150c26-67 71-93 111-77 22 9 30 32 29 57 24-25 53-26 74-5-19 62-63 95-120 95-55 0-100-25-94-70z" fill="#38D6D0"/>
+  <path d="M73 160c22-27 45-31 66-10 20 20 41 18 63-8" fill="none" stroke="#E0FFFF" stroke-width="11" stroke-linecap="round"/>
+  <path d="M112 83h58l-9 102c-1 15-13 25-28 25h-13c-15 0-27-10-28-25z" fill="#F2FEFF" stroke="#0E7490" stroke-width="7"/>
+  <path d="M124 121h34M124 145h34" stroke="#38D6D0" stroke-width="8" stroke-linecap="round"/>
+  <text x="288" y="112" fill="#F2FEFF" font-family="'Microsoft JhengHei',sans-serif" font-size="52" font-weight="800">潮汐冷萃</text>
+  <text x="292" y="154" fill="#5EEAD4" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="5">TIDE BREW</text>
+  <text x="292" y="190" fill="#9ACAD0" font-family="Arial,sans-serif" font-size="17" letter-spacing="3">COLD BREW TEA</text>
+</svg>

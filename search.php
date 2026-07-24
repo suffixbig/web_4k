@@ -2,6 +2,7 @@
 $pageKey = 'search';
 $pageScript = 'catalog.js';
 $pageBodyClass = 'catalog-page';
+require_once __DIR__ . '/_inc/ads.php';
 require __DIR__ . '/_incview/header.php';
 ?>
 <!-- 主要內容 STAR -->
@@ -12,7 +13,7 @@ require __DIR__ . '/_incview/header.php';
         <datalist id="catalogSuggestions"><option value="玄靈 黑白 橫式"></option><option value="幸福仙境 藍色"></option><option value="真人 心經水墨"></option><option value="暗色護眼 電腦"></option><option value="帥龍奇幻 AI"></option></datalist>
         <button class="mobile-filter-toggle" id="mobileFilterToggle" type="button" aria-expanded="false" aria-controls="catalogFilterPanel"><i class="fa-solid fa-sliders" aria-hidden="true"></i><span>篩選</span><b id="mobileFilterCount" hidden>0</b></button>
       </div>
-      <div class="catalog-title"><div><p class="section-label">WALLPAPER LIBRARY</p><h1>想找哪一種桌布？</h1></div><div class="catalog-status"><span id="resultCount" aria-live="polite" aria-atomic="true">正在載入桌布…</span><button class="pwa-install" id="pwaInstall" type="button" hidden><i data-lucide="monitor-down"></i>安裝桌布館</button></div></div>
+      <div class="catalog-title"><div><p class="section-label">WALLPAPER LIBRARY</p><h1>想找哪一種桌布？</h1></div><div class="catalog-status"><span id="resultCount" aria-live="polite" aria-atomic="true">正在載入桌布…</span></div></div>
       <div class="catalog-controls"><div class="category-scroll-shell"><div class="category-chips" role="tablist" aria-label="桌布分類"><button class="active" role="tab" aria-selected="true" data-topic="all">全部</button><button role="tab" aria-selected="false" data-topic="game">遊戲世界</button><button role="tab" aria-selected="false" data-topic="dragon">帥龍奇幻</button><button role="tab" aria-selected="false" data-topic="anime">萌姬動漫</button><button role="tab" aria-selected="false" data-topic="black">暗色護眼</button><button role="tab" aria-selected="false" data-topic="xuanling">玄靈</button><button role="tab" aria-selected="false" data-topic="wellbeing">幸福仙境</button></div></div><label class="catalog-sort"><span>排序</span><select id="catalogSort"><option value="popular">熱門推薦</option><option value="downloads">最多下載</option><option value="likes">最多讚</option><option value="newest">最新上架</option></select></label></div>
       <div class="active-filter-summary" id="activeFilterSummary" aria-live="polite" hidden><span>已套用：</span><div id="activeFilterChips"></div><button id="clearAllFilters" type="button">清除全部</button></div>
       <div class="filter-sheet-backdrop" id="filterSheetBackdrop" hidden></div>
@@ -22,8 +23,12 @@ require __DIR__ . '/_incview/header.php';
         <div class="filter-sheet-actions"><button id="resetFilterPanel" type="button">重設條件</button><button class="button primary" id="applyFilterPanel" type="button">查看結果</button></div>
       </aside>
     </section>
+    <?= renderAdPlacement('category_banner', 'section ad-slot--category') ?>
+    <?= renderAdPlacement('mobile_poster', 'section ad-slot--mobile') ?>
     <section class="catalog-results section" id="results"><div class="wallpaper-results" id="catalogGrid" aria-live="polite" aria-busy="true"></div><div class="catalog-load-more"><button class="button outline" id="catalogLoadMore" type="button" hidden><span>載入更多桌布</span><i class="fa-solid fa-arrow-down" aria-hidden="true"></i></button></div></section>
   </main>
   <dialog id="previewDialog" class="preview-dialog" aria-labelledby="dialogTitle"><button class="dialog-close" id="closeDialog" type="button" aria-label="關閉預覽"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button><div class="dialog-image-stage"><button class="dialog-nav dialog-prev" id="dialogPrev" type="button" aria-label="上一張桌布" aria-controls="dialogImage"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i><span>上一張</span></button><img id="dialogImage" src="" alt=""><span class="dialog-position" id="dialogPosition" aria-live="polite"></span><button class="dialog-nav dialog-next" id="dialogNext" type="button" aria-label="下一張桌布" aria-controls="dialogImage"><span>下一張</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div><div class="dialog-info"><div><small id="dialogMeta"></small><h3 id="dialogTitle"></h3><dl class="wallpaper-details" id="wallpaperDetails" aria-label="桌布基本資訊"></dl></div><div class="dialog-actions"><button class="vote-button" id="dialogLike" aria-label="喜歡" aria-pressed="false"><i class="fa-solid fa-thumbs-up" aria-hidden="true"></i><span></span></button><button class="vote-button" id="dialogDislike" aria-label="不喜歡" aria-pressed="false"><i class="fa-solid fa-thumbs-down" aria-hidden="true"></i><span></span></button><button class="vote-button" id="dialogFavorite"><i class="fa-solid fa-heart" aria-hidden="true"></i><span>收藏</span></button><a class="button primary" id="dialogDownload" href="#" download><i class="fa-solid fa-download" aria-hidden="true"></i>下載</a></div></div></dialog>
+  <div id="catalogDetailAdMarkup" hidden><?= renderAdPlacement('detail_banner', 'ad-slot--dialog') ?></div>
+  <dialog id="downloadAdDialog" class="download-ad-dialog"><button class="dialog-close" id="closeDownloadAd" type="button" aria-label="關閉廣告"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button><?= renderAdPlacement('download_complete', 'ad-slot--download') ?></dialog>
 <!-- 主要內容 END -->
 <?php require __DIR__ . '/_incview/footer.php'; ?>

@@ -8,5 +8,5 @@
 .mobile-preview .dialog-info small{display:block;max-width:560px;line-height:1.7}
 .mobile-preview .dialog-actions{justify-content:center;flex-wrap:wrap}
 .mobile-preview .dialog-actions .button{min-width:130px}
-@media(max-width:600px){.preview-dialog.mobile-preview{width:calc(100vw - 16px)}.mobile-preview .dialog-image-stage>img{width:min(330px,calc(100vw - 58px));height:min(63dvh,610px);margin-top:22px;border-width:6px;border-radius:31px}.mobile-preview .dialog-info{padding:10px 16px 20px}.mobile-preview .dialog-info h3{font-size:19px}.mobile-preview .dialog-close{right:10px;top:10px}}
+@media(max-width:600px){.preview-dialog.mobile-preview{width:calc(100vw - 16px)}.mobile-preview .dialog-image-stage>img{width:min(330px,calc(100vw - 58px));height:min(63dvh,610px);margin-top:22px;border-width:6px;border-radius:31px}.mobile-preview .dialog-info{padding:10px 16px 20px}.mobile-preview .dialog-info h3{font-size:1.1875rem}.mobile-preview .dialog-close{right:10px;top:10px}}
 @media(prefers-reduced-motion:reduce){.mobile-preview .dialog-image-stage>img{transition:none}}
