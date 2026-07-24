@@ -11,7 +11,7 @@ foreach (['codex' => 'Codex', 'claude' => 'Claude'] as $platformKey => $platform
     $versionFile = is_file($versionPath) ? trim((string) file_get_contents($versionPath)) : '';
     $version = preg_match('/^v[\d.]+$/i', $versionFile)
         ? $versionFile
-        : (preg_match('/Skill version:\s*(v[\d.]+)/i', $markdown, $matches) ? $matches[1] : 'v1.116');
+        : (preg_match('/Skill version:\s*(v[\d.]+)/i', $markdown, $matches) ? $matches[1] : 'v1.117');
     $skillPlatforms[$platformKey] = [
         'name' => $platformName,
         'path' => $relativePath,

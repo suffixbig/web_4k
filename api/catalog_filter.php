@@ -2,12 +2,20 @@
 declare(strict_types=1);
 
 function catalogAssetUrl(string $file): string { $file = ltrim(str_replace('\\', '/', $file), '/'); return str_starts_with($file, 'assets/') ? '/skin/img/assets/' . substr($file, 7) : '/' . $file; }
+function catalogNormalizeOrientation(string $orientation): string {
+    $value = mb_strtolower(trim($orientation), 'UTF-8');
+    return match ($value) {
+        '1', 'landscape', '橫式', '横式', '橫屏', '横屏' => 'landscape',
+        '2', 'portrait', '直式', '直屏' => 'portrait',
+        default => $value,
+    };
+}
 function catalogSearchTerms(array $input): array {
     $q = trim((string) ($input['q'] ?? $input['query'] ?? ''));
     $lower = mb_strtolower($q, 'UTF-8');
     $map = ['red' => ['red', '紅'], 'orange' => ['orange', '橘'], 'yellow' => ['yellow', 'gold', '黃', '金'], 'green' => ['green', '綠', '翠'], 'blue' => ['blue', '藍'], 'purple' => ['purple', '紫'], 'black' => ['black', '黑', '暗'], 'white' => ['white', '白'], 'brown' => ['brown', '棕', '褐']];
     $colors = array_values(array_filter(array_keys($map), static fn(string $color): bool => array_reduce($map[$color], static fn(bool $found, string $word): bool => $found || str_contains($lower, $word), false)));
-    $device = (string) ($input['device'] ?? ''); $orientation = (string) ($input['orientation'] ?? ''); $type = (string) ($input['content_type'] ?? $input['type'] ?? '');
+    $device = (string) ($input['device'] ?? ''); $orientation = catalogNormalizeOrientation((string) ($input['orientation'] ?? '')); $type = (string) ($input['content_type'] ?? $input['type'] ?? '');
     if ($device === '' && preg_match('/手機|mobile|phone/u', $lower)) $device = 'mobile';
     if ($device === '' && preg_match('/pc|電腦|桌機|desktop/u', $lower)) $device = 'pc';
     if ($orientation === '' && preg_match('/直式|直屏|portrait/u', $lower)) $orientation = 'portrait';
