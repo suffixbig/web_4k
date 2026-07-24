@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_DOC/
+Disallow: /config.local.php
+
+Sitemap: https://4k.1-0.tw/sitemap-xml.php

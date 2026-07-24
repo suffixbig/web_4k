@@ -2,6 +2,7 @@ config.local.php
 node_modules/
 tmp/
 uploads/
+_DOC/
 
 # Local test captures
 *-playwright.png

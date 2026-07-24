@@ -28,6 +28,12 @@ const baseUrl = process.env.SITE_URL || "http://127.0.0.1:8788";
   const claudeResponse = await page.request.get(`${baseUrl}/downloads/claude/SKILL.md`);
   const codexVersionResponse = await page.request.get(`${baseUrl}/downloads/codex/VERSION`);
   const claudeVersionResponse = await page.request.get(`${baseUrl}/downloads/claude/VERSION`);
+  const landscapeResponse = await page.request.get(`${baseUrl}/api/catalog/list?orientation=1`);
+  const portraitResponse = await page.request.get(`${baseUrl}/api/catalog/list?orientation=2`);
+  const landscapePayload = await landscapeResponse.json();
+  const portraitPayload = await portraitResponse.json();
+  const landscapeItems = landscapePayload.wallpapers || landscapePayload.items || [];
+  const portraitItems = portraitPayload.wallpapers || portraitPayload.items || [];
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   await mobilePage.goto(`${baseUrl}/ai-skill.php`, { waitUntil: "networkidle" });
   await mobilePage.locator("#claudeTab").click();
@@ -50,14 +56,24 @@ const baseUrl = process.env.SITE_URL || "http://127.0.0.1:8788";
     && legacyResponse.status() === 404
     && codexResponse.status() === 200
     && claudeResponse.status() === 200
-    && (await codexVersionResponse.text()).trim() === "v1.115"
-    && (await claudeVersionResponse.text()).trim() === "v1.115"
-    && codexPreview.includes("Skill version: v1.115")
-    && claudeState.preview.includes("Skill version: v1.115")
+    && (await codexVersionResponse.text()).trim() === "v1.117"
+    && (await claudeVersionResponse.text()).trim() === "v1.117"
+    && codexPreview.includes("Skill version: v1.117")
+    && claudeState.preview.includes("Skill version: v1.117")
+    && codexPreview.includes("orientation=1")
+    && claudeState.preview.includes("orientation=1")
+    && !codexPreview.includes("device=pc")
+    && !claudeState.preview.includes("device=pc")
+    && landscapeResponse.status() === 200
+    && portraitResponse.status() === 200
+    && landscapeItems.length > 0
+    && portraitItems.length > 0
+    && landscapeItems.every((item) => item.orientation === "landscape")
+    && portraitItems.every((item) => item.orientation === "portrait")
     && mobileState.scrollWidth <= mobileState.viewport
     && mobileState.claudePreview;
 
-  console.log(JSON.stringify({ passed, pageErrors, codexDownload, claudeState, keyboardReturnedToCodex, legacyStatus: legacyResponse.status(), codexStatus: codexResponse.status(), claudeStatus: claudeResponse.status(), mobileState }));
+  console.log(JSON.stringify({ passed, pageErrors, codexDownload, claudeState, keyboardReturnedToCodex, legacyStatus: legacyResponse.status(), codexStatus: codexResponse.status(), claudeStatus: claudeResponse.status(), landscapeStatus: landscapeResponse.status(), portraitStatus: portraitResponse.status(), landscapeCount: landscapeItems.length, portraitCount: portraitItems.length, mobileState }));
   await browser.close();
   process.exit(passed ? 0 : 1);
 })().catch((error) => {

@@ -1,29 +1,39 @@
 (() => {
   const installButton = document.querySelector('#pwaInstall');
+  const installRegion = installButton?.closest('[data-pwa-install-region]');
   let installPrompt = null;
 
+  const setInstallVisible = visible => {
+    if (installButton) installButton.hidden = !visible;
+    if (installRegion) installRegion.hidden = !visible;
+  };
+
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  if (installButton && isStandalone) installButton.hidden = true;
+  if (installButton && isStandalone) setInstallVisible(false);
 
   window.addEventListener('beforeinstallprompt', event => {
+    if (!installButton || isStandalone) return;
     event.preventDefault();
     installPrompt = event;
-    if (installButton && !isStandalone) installButton.hidden = false;
+    setInstallVisible(true);
   });
 
   installButton?.addEventListener('click', async () => {
     if (!installPrompt) return;
     installButton.disabled = true;
-    await installPrompt.prompt();
-    await installPrompt.userChoice;
-    installPrompt = null;
-    installButton.hidden = true;
-    installButton.disabled = false;
+    try {
+      await installPrompt.prompt();
+      await installPrompt.userChoice;
+    } finally {
+      installPrompt = null;
+      setInstallVisible(false);
+      installButton.disabled = false;
+    }
   });
 
   window.addEventListener('appinstalled', () => {
     installPrompt = null;
-    if (installButton) installButton.hidden = true;
+    setInstallVisible(false);
   });
 
   if ('serviceWorker' in navigator) {

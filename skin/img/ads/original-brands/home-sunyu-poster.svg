@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="600" viewBox="0 0 1920 600" role="img" aria-labelledby="title">
+  <title id="title">晴柚茶研 日光剛好的清爽</title>
+  <rect width="900" height="600" fill="#10211D" opacity=".72"/><rect x="0" width="1050" height="600" fill="url(#fade)"/>
+  <defs><linearGradient id="fade" x1="0" x2="1"><stop stop-color="#10211D" stop-opacity=".72"/><stop offset="1" stop-color="#10211D" stop-opacity="0"/></linearGradient></defs>
+  <g transform="translate(112 105)"><circle cx="58" cy="58" r="58" fill="#D9FF32"/><circle cx="58" cy="58" r="39" fill="#FFF9D7"/><path d="M58 7c18-26 55-24 67-3-33 12-48 26-67 47z" fill="#66C94B"/><path d="M26 58h64M58 26v64M36 36l44 44M80 36L36 80" stroke="#F6C344" stroke-width="8" stroke-linecap="round"/></g>
+  <text x="112" y="290" fill="#D9FF32" font-family="Arial,sans-serif" font-size="25" font-weight="800" letter-spacing="7">SUNYU LAB</text><text x="112" y="390" fill="#FFF" font-family="'Microsoft JhengHei',sans-serif" font-size="88" font-weight="800">晴柚茶研</text><text x="117" y="456" fill="#EFF8D9" font-family="'Microsoft JhengHei',sans-serif" font-size="34">日光剛好的清爽</text>
+</svg>

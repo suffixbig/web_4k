@@ -6,7 +6,7 @@
 
 目前端點：`catalog/list|search`、`stats/read|record`、`preferences/read|update`、`automation/change_now`、`users/read|update`、`help`。
 
-`catalog/search` 與 `catalog/list` 支援 `q`、`creator`（或 `author`）、`device=pc|mobile`、`orientation=landscape|portrait`、`content_type=ai|real`。JSON 資料使用 `creator`、`colors`、`content_type`、`device`、`orientation` 描述可搜尋欄位。
+`catalog/search` 與 `catalog/list` 支援 `q`、`creator`（或 `author`）、`device=pc|mobile`、`orientation=1|2`、`content_type=ai|real`。其中 `orientation=1` 代表橫式、`orientation=2` 代表直式。舊有的 `landscape|portrait` 與中英文直橫式文字仍可相容，但新串接請一律使用數字參數。JSON 資料仍使用 `creator`、`colors`、`content_type`、`device`、`orientation` 描述可搜尋欄位。
 
 `automation/change_now` 是 AI 技能的即時換桌布端點。未帶條件時優先從 `current_wallpaper_id` 或使用者偏好取得目前桌布，再回傳下一張；帶 `q` 或任一篩選條件時，會隨機回傳符合條件的一張，若無結果則回傳 `decision: no_result`，絕不改選無關桌布。AI 成功套用 Windows 桌布後，必須以 `preferences` 的 `current_set` 回寫選取的 ID。
 # 自動化換桌布 API

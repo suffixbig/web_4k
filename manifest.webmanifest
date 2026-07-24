@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "帥龍與萌姬桌布館",
-  "short_name": "龍姬桌布",
+  "name": "帥龍萌姬桌布館",
+  "short_name": "帥龍萌姬桌布",
   "description": "搜尋、收藏、投票並讓 AI 自動更換高畫質桌布。",
   "lang": "zh-Hant-TW",
   "start_url": "/search.php?source=pwa",

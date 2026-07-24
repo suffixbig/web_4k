@@ -8,4 +8,16 @@ if (str_starts_with($path, '/api/')) {
     return true;
 }
 
+if ($path === '/admin' || $path === '/admin/') {
+    $_SERVER['SCRIPT_NAME'] = '/admin.php';
+    require dirname(__DIR__) . '/admin.php';
+    return true;
+}
+
+if ($path === '/advertising' || $path === '/advertising/') {
+    $_SERVER['SCRIPT_NAME'] = '/advertising.php';
+    require dirname(__DIR__) . '/advertising.php';
+    return true;
+}
+
 return false;

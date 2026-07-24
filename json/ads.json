@@ -1,0 +1,166 @@
+{
+    "version": 3,
+    "updated_at": "2026-07-24T12:00:00+08:00",
+    "global_enabled": true,
+    "placements": {
+        "home_banner": {
+            "enabled": true,
+            "label": "首頁橫幅",
+            "format": "1920×600",
+            "brand": "中國罐裝飲料品牌廣告",
+            "headline": "每次載入隨機顯示一個品牌",
+            "image": "skin/img/ads/china-beverage-carousel/yuanqi-forest-peach.jpg",
+            "campaign_name": "中國罐裝飲料品牌概念視覺",
+            "rotation": {
+                "mode": "random_per_request"
+            },
+            "creatives": [
+                {
+                    "id": "yuanqi_forest_peach",
+                    "enabled": true,
+                    "brand": "元氣森林",
+                    "headline": "白桃氣泡水｜桃香入氣，開罐清爽",
+                    "image": "skin/img/ads/china-beverage-carousel/yuanqi-forest-peach.jpg",
+                    "disclosure": "品牌概念視覺・非官方合作"
+                },
+                {
+                    "id": "wanglaoji_herbal_tea",
+                    "enabled": true,
+                    "brand": "王老吉",
+                    "headline": "紅罐涼茶｜冰爽一開，清涼正好",
+                    "image": "skin/img/ads/china-beverage-carousel/wanglaoji-herbal-tea.jpg",
+                    "disclosure": "品牌概念視覺・非官方合作"
+                },
+                {
+                    "id": "eastroc_energy",
+                    "enabled": true,
+                    "brand": "東鵬特飲",
+                    "headline": "年輕就要醒著拚｜黑金能量，狀態就位",
+                    "image": "skin/img/ads/china-beverage-carousel/eastroc-energy.jpg",
+                    "disclosure": "品牌概念視覺・非官方合作"
+                },
+                {
+                    "id": "beibingyang_orange",
+                    "enabled": true,
+                    "brand": "北冰洋",
+                    "headline": "果汁汽水｜一口京味，一夏冰爽",
+                    "image": "skin/img/ads/china-beverage-carousel/beibingyang-orange-soda.jpg",
+                    "disclosure": "品牌概念視覺・非官方合作"
+                },
+                {
+                    "id": "warhorse_energy",
+                    "enabled": true,
+                    "brand": "戰馬",
+                    "headline": "能量就位｜開罐迎戰，現在出發",
+                    "image": "skin/img/ads/china-beverage-carousel/warhorse-energy.jpg",
+                    "disclosure": "品牌概念視覺・非官方合作"
+                }
+            ],
+            "schedule": {
+                "start_date": "",
+                "end_date": "",
+                "weekdays": []
+            },
+            "limits": {
+                "daily_impressions": 0,
+                "total_impressions": 0
+            },
+            "stats": {
+                "total_impressions": 5,
+                "by_day": {
+                    "2026-07-24": 5
+                }
+            }
+        },
+        "category_banner": {
+            "enabled": true,
+            "label": "分類橫幅",
+            "format": "1200×300",
+            "brand": "霧島果釀",
+            "headline": "果香漫進霧裡",
+            "image": "skin/img/ads/original-brands/category-mist-isle-poster.png",
+            "campaign_name": "分類頁品牌形象廣告",
+            "schedule": {
+                "start_date": "",
+                "end_date": "",
+                "weekdays": []
+            },
+            "limits": {
+                "daily_impressions": 0,
+                "total_impressions": 0
+            },
+            "stats": {
+                "total_impressions": 1,
+                "by_day": {
+                    "2026-07-24": 1
+                }
+            }
+        },
+        "detail_banner": {
+            "enabled": true,
+            "label": "作品頁橫幅",
+            "format": "1200×250",
+            "brand": "潮汐冷萃",
+            "headline": "低溫慢萃，自在清醒",
+            "image": "skin/img/ads/original-brands/detail-tide-brew-poster.png",
+            "campaign_name": "作品頁品牌形象廣告",
+            "schedule": {
+                "start_date": "",
+                "end_date": "",
+                "weekdays": []
+            },
+            "limits": {
+                "daily_impressions": 0,
+                "total_impressions": 0
+            },
+            "stats": {
+                "total_impressions": 0,
+                "by_day": []
+            }
+        },
+        "download_complete": {
+            "enabled": true,
+            "label": "下載完成廣告",
+            "format": "1200×400",
+            "brand": "橙光茶室",
+            "headline": "剛剛好的暖與甜",
+            "image": "skin/img/ads/original-brands/complete-orange-room-poster.png",
+            "campaign_name": "下載完成頁品牌形象廣告",
+            "schedule": {
+                "start_date": "",
+                "end_date": "",
+                "weekdays": []
+            },
+            "limits": {
+                "daily_impressions": 0,
+                "total_impressions": 0
+            },
+            "stats": {
+                "total_impressions": 0,
+                "by_day": []
+            }
+        },
+        "mobile_poster": {
+            "enabled": true,
+            "label": "手機版圖片",
+            "format": "1080×1350",
+            "brand": "星野小飲",
+            "headline": "今晚也要閃閃喝",
+            "image": "skin/img/ads/original-brands/mobile-aster-sip-poster.png",
+            "campaign_name": "手機版品牌形象廣告",
+            "schedule": {
+                "start_date": "",
+                "end_date": "",
+                "weekdays": []
+            },
+            "limits": {
+                "daily_impressions": 0,
+                "total_impressions": 0
+            },
+            "stats": {
+                "total_impressions": 0,
+                "by_day": []
+            }
+        }
+    }
+}
