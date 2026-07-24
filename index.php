@@ -80,7 +80,7 @@ usort($latestWallpapers, static function (array $left, array $right): int {
     $dateResult = strcmp((string) ($right['created_at'] ?? ''), (string) ($left['created_at'] ?? ''));
     return $dateResult !== 0 ? $dateResult : ((int) ($right['id'] ?? 0) <=> (int) ($left['id'] ?? 0));
 });
-$latestWallpapers = array_slice($latestWallpapers, 0, 4);
+$latestWallpapers = array_slice($latestWallpapers, 0, 16);
 
 $popularWallpapers = $homeWallpapers;
 usort($popularWallpapers, static function (array $left, array $right): int {
@@ -119,7 +119,7 @@ require __DIR__ . '/_incview/header.php';
 <main id="main-content" tabindex="-1">
   <section class="home-feature-carousel" data-home-carousel aria-roledescription="carousel" aria-labelledby="homeHeroLabel">
     <p id="homeHeroLabel" class="sr-only">帥龍萌姬桌布館精選桌布與主要功能</p>
-    <div class="home-top-search" aria-labelledby="homeSearchTitle">
+    <div class="home-top-search" id="homeTopSearch" aria-labelledby="homeSearchTitle">
       <div class="section home-top-search-layout">
         <p class="home-top-search-title" id="homeSearchTitle">想找什麼桌布？</p>
         <form class="home-search-panel" action="search.php" method="get" role="search">
@@ -145,7 +145,7 @@ require __DIR__ . '/_incview/header.php';
           <span class="home-feature-scrim" aria-hidden="true"></span>
           <div class="section home-feature-inner">
             <div class="home-feature-copy">
-              <p class="home-feature-kicker"><span>0<?= $index + 1 ?> / 0<?= count($homeFeatureSlides) ?></span><?= htmlspecialchars((string) $feature['label'], ENT_QUOTES, 'UTF-8') ?></p>
+              <p class="home-feature-kicker"><?= htmlspecialchars((string) $feature['label'], ENT_QUOTES, 'UTF-8') ?></p>
               <?php if ($index === 0): ?>
                 <h1><?= nl2br(htmlspecialchars((string) $feature['title'], ENT_QUOTES, 'UTF-8')) ?></h1>
               <?php else: ?>
@@ -162,6 +162,9 @@ require __DIR__ . '/_incview/header.php';
 
     <div class="section home-feature-controls" aria-label="輪播控制">
       <button id="homePrevSlide" class="home-feature-arrow" type="button" aria-label="顯示上一張專案特色"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+      <span class="home-feature-counter" id="homeFeatureCounter" aria-label="目前為第 1 張，共 <?= count($homeFeatureSlides) ?> 張">
+        <strong id="homeFeatureCurrent">01</strong><span aria-hidden="true">/</span><span id="homeFeatureTotal"><?= str_pad((string) count($homeFeatureSlides), 2, '0', STR_PAD_LEFT) ?></span>
+      </span>
       <div class="home-feature-dots" aria-label="選擇專案特色">
         <?php foreach ($homeFeatureSlides as $index => $feature): ?>
           <button class="<?= $index === 0 ? 'is-active' : '' ?>" type="button" data-home-go-slide="<?= $index ?>"
@@ -179,11 +182,20 @@ require __DIR__ . '/_incview/header.php';
   <?= renderAdPlacement('home_banner', 'section ad-slot--home') ?>
 
   <section class="home-gallery-section section" aria-labelledby="latestTitle" data-home-list="latest">
-    <div class="home-gallery-head"><div><h2 id="latestTitle">最新上架</h2></div><a class="button outline" href="search.php">查看全部桌布<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
-    <div class="home-wallpaper-grid">
+    <div class="home-gallery-head">
+      <div><h2 id="latestTitle">最新上架</h2></div>
+      <div class="home-gallery-actions">
+        <button class="home-gallery-arrow" id="latestPrevSlide" type="button" aria-label="顯示上一組最新桌布"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+        <button class="home-gallery-arrow" id="latestNextSlide" type="button" aria-label="顯示下一組最新桌布"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        <a class="button outline" href="search.php">查看全部桌布<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="home-wallpaper-grid home-latest-carousel" data-latest-carousel>
       <?php if ($latestWallpapers === []): ?><div class="home-gallery-empty"><i class="fa-solid fa-image" aria-hidden="true"></i><h3>暫時沒有最新桌布</h3><p>請稍後重新整理，或先前往完整桌布目錄。</p></div><?php endif; ?>
       <?php foreach ($latestWallpapers as $index => $wallpaper) echo homeWallpaperCard($wallpaper, 'latest', $index); ?>
     </div>
+    <div class="home-latest-dots" aria-label="最新桌布輪播頁次"></div>
+    <p id="latestCarouselStatus" class="sr-only" aria-live="polite" aria-atomic="true"></p>
   </section>
 
   <section class="home-popular-band" aria-labelledby="popularTitle" data-home-list="popular">

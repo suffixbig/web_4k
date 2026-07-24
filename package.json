@@ -29,5 +29,8 @@
   "type": "commonjs",
   "devDependencies": {
     "playwright": "^1.61.1"
+  },
+  "dependencies": {
+    "slick-carousel": "^1.8.1"
   }
 }

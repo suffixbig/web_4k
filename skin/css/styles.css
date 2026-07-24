@@ -487,15 +487,18 @@
   order:1;
   margin-left:auto;
   margin-right:-20px;
+  padding:0;
   border:0;
   border-radius:0;
   background:transparent;
   color:var(--lime);
   box-shadow:none;
+  cursor:pointer;
 }
 .nav-search-link:hover,
 .nav-search-link:focus-visible,
-.nav-search-link.active{
+.nav-search-link.active,
+.nav-search-link[aria-expanded="true"]{
   border:0;
   background:transparent;
   color:#e7ff82;
@@ -505,6 +508,9 @@
 .nav-shell>.nav-links{order:2;margin-left:0}
 .nav-shell>.mobile-menu-toggle{order:3}
 .nav-shell>.nav-cta{order:4}
+.nav-shell>.nav-links a.nav-qa-link{color:var(--lime)}
+.nav-shell>.nav-links a.nav-qa-link:hover,
+.nav-shell>.nav-links a.nav-qa-link:focus-visible{color:#e9ff91}
 
 /* Glass overlays for secondary wallpaper metadata and advertising captions. */
 .home-wallpaper-device,
